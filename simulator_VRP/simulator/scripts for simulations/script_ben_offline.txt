@@ -1,0 +1,12 @@
+setLogFile /home/yang/capstone/simulator_VRP/LOGFILE.txt
+loadScenario /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/instance_benth_pvh_tfe/class1/0-100-rc101-1Scenario.json
+loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/instance_benth_pvh_tfe/class1/0-100-rc101-1Carrier.json 
+loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/instance_benth_pvh_tfe/class1/0-100-rc101-1Customers.json
+loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/instance_benth_pvh_tfe/class1/0-100-rc101-1Graph.json
+setComputationTime 1.0
+setOfflineTime 3.0
+setVehicleCapacity car 1000
+sendAll
+startOfflineSimulation
+stopSimulation
+

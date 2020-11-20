@@ -1,0 +1,12 @@
+setLogFile /home/yang/capstone/simulator_VRP/myNewLogFile.txt
+loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/realdata_optimod_lyon/instances_copy/Carrier.json
+loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/realdata_optimod_lyon/instances_copy/20cw/20cw_1Customers.json
+loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/realdata_optimod_lyon/instances_copy/20cw/20cw_1Graph.json
+generateScenario --ot 10.0 --ct 2.0
+setVehicleCapacity car 1000
+sendAll
+startOfflineSimulation
+startOnlineSimulation
+saveSolutions /home/yang/Desktop/solutionScript.txt
+stopSimulation
+close

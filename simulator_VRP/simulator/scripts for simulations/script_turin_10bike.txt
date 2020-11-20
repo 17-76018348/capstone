@@ -1,0 +1,14 @@
+loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/carrier.json
+loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Customer.json
+loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/Graph.json
+loadScenario /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/scenario.json
+deleteVehicles
+addVehicles 10 bike
+setComputationTime 0.5
+setOfflineTime 20.0
+sendAll
+startOfflineSimulation
+startOnlineSimulation
+saveSolutions /home/yang/Desktop/solutionsDir/solution_turin.txt
+stopSimulation
+close
