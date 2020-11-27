@@ -361,6 +361,10 @@ class Solution:
 				return False
 			vehicleCharge += additionalCharge
 			vehicleCapacity = carrierObj.getCapacityOfVehicle(roadId)
+
+			# for 문 돌려서 하면됨. 
+			# 체크포인트
+
 			if vehicleCharge > vehicleCapacity:
 				print('capacity of vehicle {} is exceeded, capacity : {}  charge {}'.format(roadId, vehicleCapacity, vehicleCharge))
 				return False

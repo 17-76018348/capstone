@@ -71,6 +71,9 @@ class Carrier:
 		return the latest possible time unit to travel from startNode to endNode,
 		arriving at arrivalTime
 		return False if the delay is too short between these two nodes.
+		가장 늦게 출발할수 있는  time 
+		ex) 10시까지 가야되고 20분 걸리면 9시 39분 59초다
+		
 		"""
 		latestdepartureTU = False
 		searchFinished = False

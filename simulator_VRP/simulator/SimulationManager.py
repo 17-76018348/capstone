@@ -173,8 +173,8 @@ class SMthread(threading.Thread):
         myCustomer = Customer()
         myFiles = {}
         self.mySolutions = Solution()
-        self.mySolverListener = SolverListenerThread(self.listenerQueue, self.simulationQueue, self.solutionsQueue, self.timeUnitQueue, self.eventSMQueue, self.eventLock)
-        self.mySolverListener.start()
+        #self.mySolverListener = SolverListenerThread(self.listenerQueue, self.simulationQueue, self.solutionsQueue, self.timeUnitQueue, self.eventSMQueue, self.eventLock)
+        #self.mySolverListener.start()
 
         testParser = argparse.ArgumentParser(prog = 'test',)
         testParser.add_argument('--ct', type=float, default=argparse.SUPPRESS)
@@ -188,6 +188,7 @@ class SMthread(threading.Thread):
 
         while not exitFlag:
             # wait for a event to manage
+            #Userinputmanager makes  eventSMqueue flag 1
             self.eventSMQueue.wait()
 
             if verbose:
@@ -195,52 +196,69 @@ class SMthread(threading.Thread):
 
 
             self.eventLock.acquire()
+            # eventSMqueue flag 0
             self.eventSMQueue.clear()
             self.eventLock.release()
 
             while not self.commandQueue.empty():
+
+                # remove and return command from command queue
                 command = self.commandQueue.get()
+
+                # split with space,blank
                 commandSplit = command.split()
 
                 if len(commandSplit) == 0:
                     pass
                 elif commandSplit[0] == 'addVehicles':
+
+                    #only for presimulation state
+                    #initial state load input file 
                     if self.simulationStatus != 'PreSimulation':
                         print('   Error: The fleet of vehicles can be modified only before the simulation')
                     else:
+                        # loadcarrier is not executed
                         if not myCarrier.data:
                             print('   Error: No Carrier file is loaded')
                         else:
                             validArgs = True
+                            
+                            # just command addvehicle
                             if len(commandSplit) is 1:
                                 validArgs = False
                                 print('   Error: missing numbers and types of vehicles to be added')
+                                # save log
                                 self.printLog('User command: ' + command + ' : Error: missing numbers and types of vehicles to be added')
                             
+                            # in normal command -> addvehicle number types -> 3 argument3, 5, 7, 9
                             elif len(commandSplit)%2 is 0:
                                 validArgs = False
                                 print('   Error: the number of argument is not correct')
                                 self.printLog('User command: ' + command + ' Error: the number of argument is not correct')
                             
+                            # normal case
                             elif len(commandSplit)%2 is 1:
                                 expect = 'Number'
                                 for arg in commandSplit[1:]:
                                     if expect == 'Number':
+                                        # if not number
                                         if not arg.isdigit():
                                             validArgs = False
                                             print('   Error: '+arg+' is not a number')
                                         expect = 'VehicleType'
                                     elif expect == 'VehicleType':
+                                        # if vehicle type name is not in carrier file 
                                         if not myCarrier.containVehicleType(arg):
                                             validArgs = False
                                             print('   Error: '+arg+' is not a vehicle type in the carrier file')
                                         expect = 'Number'
-                        
+                            #argument is normally inputed
                             if validArgs:
                                 # iterate on the number on the command
                                 cs = commandSplit
                                 noError = True
                                 for num in range(1, len(cs), 2):
+                                    #check number of vehicle
                                     if not str.isdigit(cs[num]):
                                         noError = False
                                         print('   Error: invalid argument : '+cs[num]+' should be a number')
@@ -252,15 +270,19 @@ class SMthread(threading.Thread):
                                         print('   Error: invalid argument : "'+cs+'" is not an available type of vehicle')
                                         self.printLog('User command : '+command+' : Error: invalid argument : "'+cs+'" is not an available type of vehicle')
 
+                                # executed normally 
                                 if noError:
                                     # loop to add the vehicles
                                     maxId = -1
                                     if not not myCarrier.data['Vehicles']:
+                                        # vehicle start from 0 to n
                                         maxId = max([int(vehicle) for vehicle in myCarrier.data['Vehicles']])
                                     for num in range(1, len(cs), 2):
                                         for i in range(0, int(cs[num])):
                                             maxId += 1
+                                            # type of vehicle
                                             newVehicle = {'VehicleType': cs[num+1]}
+                                            #add new vehicle to mycarrier
                                             myCarrier.data['Vehicles'][str(maxId)] = newVehicle
                                     self.sendToGUI(('carrierData', myCarrier.data))
                                     self.addToDataNotSent('Carrier')
@@ -269,7 +291,8 @@ class SMthread(threading.Thread):
                     if verbose:
                         print('   SimulationManager :: serve command :: ', command)
                     self.eventCommand.set()
-
+                elif commandSplit == ['solve']:
+                    pass
 
 
                 elif commandSplit == ['data']:
@@ -291,19 +314,23 @@ class SMthread(threading.Thread):
                     if self.simulationStatus in ['OfflinePause', 'OnlinePause']:
                         self.downQueue.put('continue')
                     self.downQueue.put('close')
-                    self.listenerQueue.put('close')
+                    # self.listenerQueue.put('close')
+                    # exit from while loop
                     exitFlag = True
                     self.printLog('User command : close')
 
                     if verbose:
                         print('   SimulationManager :: serve command :: ', command)
+                    # event command flag 1
                     self.eventCommand.set()
 
                 elif commandSplit == ['computationTime']:
+                    # print computaton time to console if it has it
                     if 'ComputationTime' not in myFiles or myFiles['ComputationTime'] == None:
                         print('The computation time is not defined\nUse command "setComputationTime" to set the computation time')
                     else:
                         print('ComputationTime set to {} seconds'.format(myFiles['ComputationTime']))
+                    # event command flag 1
                     self.eventCommand.set()
 
 
@@ -318,11 +345,14 @@ class SMthread(threading.Thread):
                     #     pauseAsked = False
                     #     self.printLog('User command : continue')
 
+                    # if its state is pause state 
+                    # switch the state to continuef
                     if self.simulationStatus in ['OfflinePause', 'OnlinePause']:
                         self.downQueue.put('continue')
                         self.printLog('User command : continue')
                     elif self.simulationStatus in ['OfflineComputation', 'OnlineComputation']:
                         print('   ERROR: simulation not in pause')
+                    # simulator asked to solver for pause but dont received
                     elif self.simulationStatus in ['OfflinePauseAsked', 'OnlinePauseAsked']:
                         print('   ERROR: a precedent pause command was entered, the solver did not start the pause yet')
                     elif self.simulationStatus in ['PreSimulation', 'OfflineEnd', 'PostSimulation']:
@@ -334,14 +364,17 @@ class SMthread(threading.Thread):
 
 
                 elif commandSplit == ['currentStatus']:
+                    # print to console current state
                     print('   Current status of the simulator : ',self.simulationStatus)
                     self.eventCommand.set()
 
                 elif commandSplit == ['createNewSolution']:
+                    # self.data['UserSolution'] = copy.deepcopy([self.data['Solutions'][-1]])
                     self.mySolutions.newUserSolution()
                     self.eventCommand.set()
 
                 elif commandSplit[0] == 'deleteRequest':
+                    # command + requestId + roadId
                     if len(commandSplit) != 3:
                         print('   incorrect number of arguments')
                     else:
@@ -355,6 +388,8 @@ class SMthread(threading.Thread):
                     self.eventCommand.set()
 
                 elif commandSplit == ['deleteVehicles']:
+                    # delete only can in presimulation 
+                    # after simulation executed can't
                     if self.simulationStatus in ['PreSimulation']:
                         myCarrier.data['Vehicles'] = {}
                         self.addToDataNotSent('Carrier')
@@ -368,7 +403,10 @@ class SMthread(threading.Thread):
                     self.eventCommand.set()
 
                 elif commandSplit[0] == 'generateScenario':
+                    # only can in presimulation
                     if self.simulationStatus in ['PreSimulation']:
+                        # if command loadcustomer was executed
+                        # mycustomer.data is available
                         if not myCustomer.data:
                             print('      please load a Customer file in order to generate a scenario')
                             self.printLog('User command : generateScenario : ERROR no Customer file loaded')
@@ -394,6 +432,7 @@ class SMthread(threading.Thread):
 
 
                 elif commandSplit[0] == 'insertRequest':
+                    # command + requestId + roadId + position
                     if len(commandSplit) != 4:
                         print('   Incorrect number of arguments (requestId and roadId and position)')
                     else:
@@ -407,9 +446,11 @@ class SMthread(threading.Thread):
                     self.eventCommand.set()
 
                 elif commandSplit[0] == 'loadCarrier':
+                    # only if presimulation
                     if self.simulationStatus in ['PreSimulation']:
                         command = command.replace('loadCarrier ', '', 1).rstrip()
                         if myCarrier.loadFile(command):
+                            # add to NotSent remove form Sent
                             self.addToDataNotSent('Carrier')
                             self.removeFromDataSent('Carrier')
                             self.sendToGUI(('carrierData', myCarrier.data))
@@ -427,6 +468,8 @@ class SMthread(threading.Thread):
                     if self.simulationStatus in ['PreSimulation']:
                         command = command.replace('loadCustomer ', '', 1).rstrip()
                         if myCustomer.loadFile(command):
+                            # add to NotSent
+                            # remove from Sent
                             self.addToDataNotSent('Customer')
                             self.removeFromDataSent('Customer')
                             self.sendToGUI(('customerData', myCustomer.data))
@@ -774,44 +817,45 @@ class SMthread(threading.Thread):
 
 
                 elif commandSplit == ['sendAll']:
-                    if self.simulationStatus not in ['PostSimulation']:
-                        if not self.simuAPI.testConnection():
-                            self.sendToGUI(('error','solver not connected'))
-                            print('   ERROR: No solver connected')
-                        else:
-                            self.printLog('User command : sendEverything')
-                            if not not myCarrier.data:
-                                self.simuAPI.sendCarrierJsonToSolver(json.dumps(myCarrier.data))
-                                self.removeFromDataNotSent('Carrier')
-                                self.addToDataSent('Carrier')
-                                print('  Carrier sent')
-                                self.printLog('sendCarrierToSolver')
-                            if not not myCustomer.data:
-                                self.simuAPI.sendCustomersJsonToSolver(json.dumps(myCustomer.data))
-                                self.removeFromDataNotSent('Customer')
-                                self.addToDataSent('Customer')
-                                print('  Customer sent')
-                                self.printLog('sendCustomersToSolver')
-                            if not not myGraph.data:
-                                self.simuAPI.sendGraphJsonToSolver(json.dumps(myGraph.data))
-                                self.removeFromDataNotSent('Graph')
-                                self.addToDataSent('Graph')
-                                print('  Graph sent')
-                                self.printLog('sendGraphToSolver')
-                            for key in myFiles:
-                                jsonMsg = '{ "' + key + '" :' + str(json.dumps(myFiles[key])) + '}'
-                                self.simuAPI.sendFile(jsonMsg)
-                                self.removeFromDataNotSent(key)
-                                self.addToDataSent(key)
-                                print('  '+str(key)+' sent')
-                                self.printLog('User command : send file loaded as %s' % ( str(key)))
-                    else:
-                        print('   ERROR: data can not be sent after the end of the simulation')
+                    pass
+                    # solver
+                    # if self.simulationStatus not in ['PostSimulation']:
+                    #     if not self.simuAPI.testConnection():
+                    #         self.sendToGUI(('error','solver not connected'))
+                    #         print('   ERROR: No solver connected')
+                    #     else:
+                    #         self.printLog('User command : sendEverything')
+                    #         if not not myCarrier.data:
+                    #             self.simuAPI.sendCarrierJsonToSolver(json.dumps(myCarrier.data))
+                    #             self.removeFromDataNotSent('Carrier')
+                    #             self.addToDataSent('Carrier')
+                    #             print('  Carrier sent')
+                    #             self.printLog('sendCarrierToSolver')
+                    #         if not not myCustomer.data:
+                    #             self.simuAPI.sendCustomersJsonToSolver(json.dumps(myCustomer.data))
+                    #             self.removeFromDataNotSent('Customer')
+                    #             self.addToDataSent('Customer')
+                    #             print('  Customer sent')
+                    #             self.printLog('sendCustomersToSolver')
+                    #         if not not myGraph.data:
+                    #             self.simuAPI.sendGraphJsonToSolver(json.dumps(myGraph.data))
+                    #             self.removeFromDataNotSent('Graph')
+                    #             self.addToDataSent('Graph')
+                    #             print('  Graph sent')
+                    #             self.printLog('sendGraphToSolver')
+                    #         for key in myFiles:
+                    #             jsonMsg = '{ "' + key + '" :' + str(json.dumps(myFiles[key])) + '}'
+                    #             self.simuAPI.sendFile(jsonMsg)
+                    #             self.removeFromDataNotSent(key)
+                    #             self.addToDataSent(key)
+                    #             print('  '+str(key)+' sent')
+                    #             self.printLog('User command : send file loaded as %s' % ( str(key)))
+                    # else:
+                    #     print('   ERROR: data can not be sent after the end of the simulation')
 
-                    if verbose:
-                        print('   SimulationManager :: serve command :: ', command)
-                    self.eventCommand.set()
-
+                    # if verbose:
+                    #     print('   SimulationManager :: serve command :: ', command)
+                    # self.eventCommand.set()
                 elif commandSplit == ['sendCarrierToGUI']:
                     self.guiQueue.put(('carrierData', myCarrier.data))
 
@@ -825,93 +869,97 @@ class SMthread(threading.Thread):
                     self.sendToGUI(('scenarioData', myScenario.data))
 
                 elif commandSplit == ['sendCarrierToSolver']:
-                    if self.simulationStatus not in ['PostSimulation']:
-                        if not self.simuAPI.testConnection():
-                            print('   ERROR: No solver connected')
-                        else:
-                            if not not myCarrier.data:
-                                self.simuAPI.sendCarrierJsonToSolver(json.dumps(myCarrier.data))
-                                self.removeFromDataNotSent('Carrier')
-                                self.addToDataSent('Carrier')
-                                print('  Carrier sent')
-                                self.printLog('User command : sendCarrierToSolver')
-                            else : 
-                                print('   Carrier is empty. Did you use loadCarrier ? ')
-                                self.printLog('User command : sendCarrierToSolver \n Error: Carrier is empty')
-                    else:
-                        print('   ERROR: data can not be sent after the end of the simulation')
+                    pass
+                    # if self.simulationStatus not in ['PostSimulation']:
+                    #     if not self.simuAPI.testConnection():
+                    #         print('   ERROR: No solver connected')
+                    #     else:
+                    #         if not not myCarrier.data:
+                    #             self.simuAPI.sendCarrierJsonToSolver(json.dumps(myCarrier.data))
+                    #             self.removeFromDataNotSent('Carrier')
+                    #             self.addToDataSent('Carrier')
+                    #             print('  Carrier sent')
+                    #             self.printLog('User command : sendCarrierToSolver')
+                    #         else : 
+                    #             print('   Carrier is empty. Did you use loadCarrier ? ')
+                    #             self.printLog('User command : sendCarrierToSolver \n Error: Carrier is empty')
+                    # else:
+                    #     print('   ERROR: data can not be sent after the end of the simulation')
 
-                    if verbose:
-                        print('   SimulationManager :: serve command :: ', command)
-                    self.eventCommand.set()
+                    # if verbose:
+                    #     print('   SimulationManager :: serve command :: ', command)
+                    # self.eventCommand.set()
                     
                 elif commandSplit == ['sendCustomersToSolver']:
-                    if self.simulationStatus not in ['PostSimulation']:
-                        if not self.simuAPI.testConnection():
-                            print('   ERROR: No solver connected')
-                        else:
-                            if not not myCustomer.data:
-                                self.simuAPI.sendCustomersJsonToSolver(json.dumps(myCustomer.data))
-                                self.removeFromDataNotSent('Customer')
-                                self.addToDataSent('Customer')
-                                print('  Customer sent')
-                                self.printLog('User command : sendCustomersToSolver')
-                            else : 
-                                print('   Customer is empty. Did you use loadCustomer ? ')
-                                self.printLog('User command : sendCustomersToSolver \n Error: Customer is empty')
-                    else:
-                        print('   ERROR: data can not be sent after the end of the simulation')
+                    pass
+                    # if self.simulationStatus not in ['PostSimulation']:
+                    #     if not self.simuAPI.testConnection():
+                    #         print('   ERROR: No solver connected')
+                    #     else:
+                    #         if not not myCustomer.data:
+                    #             self.simuAPI.sendCustomersJsonToSolver(json.dumps(myCustomer.data))
+                    #             self.removeFromDataNotSent('Customer')
+                    #             self.addToDataSent('Customer')
+                    #             print('  Customer sent')
+                    #             self.printLog('User command : sendCustomersToSolver')
+                    #         else : 
+                    #             print('   Customer is empty. Did you use loadCustomer ? ')
+                    #             self.printLog('User command : sendCustomersToSolver \n Error: Customer is empty')
+                    # else:
+                    #     print('   ERROR: data can not be sent after the end of the simulation')
 
-                    if verbose:
-                        print('   SimulationManager :: serve command :: ', command)
-                    self.eventCommand.set()
+                    # if verbose:
+                    #     print('   SimulationManager :: serve command :: ', command)
+                    # self.eventCommand.set()
 
                 elif command.startswith('sendFile '):
-                    if self.simulationStatus not in ['PostSimulation']:
-                        if not self.simuAPI.testConnection():
-                            print('   ERROR: No solver connected')
-                        else:
-                            command = command.replace('sendFile', '', 1).split()
-                            key = command[-1]
-                            fileName = ' '.join(command[:len(command)-1])
-                            try:
-                                myFiles[key] = json.load(open(fileName))
-                                jsonMsg = '{ "' + key + '" :' + str(json.dumps(myFiles[key])) + '}'
-                                self.simuAPI.sendFile(jsonMsg)
-                                self.removeFromDataNotSent(key)
-                                self.addToDataSent(key)
-                                print('  '+str(key)+' sent')
-                                self.printLog('User command : sendFile %s %s' % (str(fileName), str(key)))
-                            except IOError:
-                                print('   Error: cannot send the file', fileName) 
-                                self.printLog('User command : sendFile %s %s \n Error: cannot send the file %s' % (str(fileName), str(key), str(fileName)))
-                    else:
-                        print('   ERROR: data can not be sent after the end of the simulation')
+                    pass
+                    # if self.simulationStatus not in ['PostSimulation']:
+                    #     if not self.simuAPI.testConnection():
+                    #         print('   ERROR: No solver connected')
+                    #     else:
+                    #         command = command.replace('sendFile', '', 1).split()
+                    #         key = command[-1]
+                    #         fileName = ' '.join(command[:len(command)-1])
+                    #         try:
+                    #             myFiles[key] = json.load(open(fileName))
+                    #             jsonMsg = '{ "' + key + '" :' + str(json.dumps(myFiles[key])) + '}'
+                    #             self.simuAPI.sendFile(jsonMsg)
+                    #             self.removeFromDataNotSent(key)
+                    #             self.addToDataSent(key)
+                    #             print('  '+str(key)+' sent')
+                    #             self.printLog('User command : sendFile %s %s' % (str(fileName), str(key)))
+                    #         except IOError:
+                    #             print('   Error: cannot send the file', fileName) 
+                    #             self.printLog('User command : sendFile %s %s \n Error: cannot send the file %s' % (str(fileName), str(key), str(fileName)))
+                    # else:
+                    #     print('   ERROR: data can not be sent after the end of the simulation')
 
-                    if verbose:
-                        print('   SimulationManager :: serve command :: ', command)
-                    self.eventCommand.set()
+                    # if verbose:
+                    #     print('   SimulationManager :: serve command :: ', command)
+                    # self.eventCommand.set()
                     
                 elif commandSplit == ['sendGraphToSolver']:
-                    if self.simulationStatus not in ['PostSimulation']:
-                        if not self.simuAPI.testConnection():
-                            print('   ERROR: No solver connected')
-                        else:
-                            if not not myGraph.data:
-                                self.simuAPI.sendGraphJsonToSolver(json.dumps(myGraph.data))
-                                self.removeFromDataNotSent('Graph')
-                                self.addToDataSent('Graph')
-                                print('  Graph sent')
-                                self.printLog('User command : sendGraphToSolver')
-                            else : 
-                                print('   Graph is empty. Did you use loadGraph ? ')
-                                self.printLog('User command : sendGraphToSolver \n Error: Graph is empty')
-                    else:
-                        print('   ERROR: data can not be sent after the end of the simulation')
+                    pass
+                    # if self.simulationStatus not in ['PostSimulation']:
+                    #     if not self.simuAPI.testConnection():
+                    #         print('   ERROR: No solver connected')
+                    #     else:
+                    #         if not not myGraph.data:
+                    #             self.simuAPI.sendGraphJsonToSolver(json.dumps(myGraph.data))
+                    #             self.removeFromDataNotSent('Graph')
+                    #             self.addToDataSent('Graph')
+                    #             print('  Graph sent')
+                    #             self.printLog('User command : sendGraphToSolver')
+                    #         else : 
+                    #             print('   Graph is empty. Did you use loadGraph ? ')
+                    #             self.printLog('User command : sendGraphToSolver \n Error: Graph is empty')
+                    # else:
+                    #     print('   ERROR: data can not be sent after the end of the simulation')
 
-                    if verbose:
-                        print('   SimulationManager :: serve command :: ', command)
-                    self.eventCommand.set()
+                    # if verbose:
+                    #     print('   SimulationManager :: serve command :: ', command)
+                    # self.eventCommand.set()
 
                 elif command.startswith('setComputationTime '):
                     if self.simulationStatus in ['PreSimulation', 'OfflineComputation', 'OfflinePauseAsked', 'OfflinePause', 'OfflineEnd']:
@@ -1102,13 +1150,13 @@ class SMthread(threading.Thread):
                             
 
                             # check solver connected
-                            if not self.simuAPI.testConnection():
-                                connectionOK = False
-                                self.sendToGUI(('error', 'solver not connected, impossible to start the offline simulation'))
-                                print('      solver not connected')
+                            # if not self.simuAPI.testConnection():
+                            #     connectionOK = False
+                            #     self.sendToGUI(('error', 'solver not connected, impossible to start the offline simulation'))
+                            #     print('      solver not connected')
 
                             # check all necessary data is here
-                            elif not myCustomer.data or not myGraph.data or not myScenario.data or not myCarrier.data or 'OfflineTime' not in myFiles: 
+                            if not myCustomer.data or not myGraph.data or not myScenario.data or not myCarrier.data or 'OfflineTime' not in myFiles: 
                                 print('    cannot launch simulation due to the following problems:')
                                 dataAvailable = False
                                 if not myCustomer.data:
@@ -1134,7 +1182,8 @@ class SMthread(threading.Thread):
                                 if all([i == 'OfflineTime' for i in self.dataNotSent ]):
                                     for data in self.dataNotSent:
                                         jsonMsg = '{ "' + data + '" :' + str(json.dumps(myFiles[data])) + '}'
-                                        self.simuAPI.sendFile(jsonMsg)
+                                        #grpc communication
+                                        # self.simuAPI.sendFile(jsonMsg)
                                         self.addToDataSent(data)
                                     # do not modify what we iterate on while we iterate on it
                                     self.dataNotSent = []
@@ -1205,9 +1254,9 @@ class SMthread(threading.Thread):
                                     print('      Initial offline solution missing')
 
                             # check solver connected
-                            if not self.simuAPI.testConnection():
-                                connectionOK = False
-                                print('      solver not connected')
+                            # if not self.simuAPI.testConnection():
+                            #     connectionOK = False
+                            #     print('      solver not connected')
 
                             if connectionOK and dataAvailable:
                                 allDataWasSent = True
@@ -1219,7 +1268,8 @@ class SMthread(threading.Thread):
                                     for data in self.dataNotSent:
                                         if data == 'ComputationTime':
                                             jsonMsg = '{ "' + data + '" :' + str(json.dumps(myFiles[data])) + '}'
-                                            self.simuAPI.sendFile(jsonMsg)
+                                            # grpc communication
+                                            # self.simuAPI.sendFile(jsonMsg)
                                             self.addToDataSent(data)
                                     self.dataNotSent = []
 
@@ -1256,7 +1306,10 @@ class SMthread(threading.Thread):
                         self.eventCommand.set()
 
                 elif commandSplit == ['stopSimulation']:
-
+                    """
+                    stop the simulation and reset the solutions
+                    join the thread mysimulation if necessary
+                    """
                     self.stopSimulation(self.mySolutions, mySimulation)
                     if verbose:
                         print('   SimulationManager :: serve command :: ', command)
@@ -1285,16 +1338,17 @@ class SMthread(threading.Thread):
                     self.eventCommand.set()
 
                 elif commandSplit == ['testConnection']:
-                    if self.simuAPI.testConnection():
-                        print('   solver connected')
-                        self.printLog('User command : testConnection : solver connected')
-                    else:
-                        print('   solver not connected')
-                        self.printLog('User command : testConnection : solver not connected')
+                    pass
+                    # if self.simuAPI.testConnection():
+                    #     print('   solver connected')
+                    #     self.printLog('User command : testConnection : solver connected')
+                    # else:
+                    #     print('   solver not connected')
+                    #     self.printLog('User command : testConnection : solver not connected')
 
-                    if verbose:
-                        print('   SimulationManager :: serve command :: ', command)
-                    self.eventCommand.set()
+                    # if verbose:
+                    #     print('   SimulationManager :: serve command :: ', command)
+                    # self.eventCommand.set()
   
                 else:
                     print('   command incorrect')
@@ -1305,6 +1359,9 @@ class SMthread(threading.Thread):
                 if not self.scriptMode:
                     self.eventCommand.set()
             
+
+#위는 커맨드들 아래부터 solver와 통신
+
             #manage the message from the simulation thread 
             while not self.upQueue.empty():
                 message = self.upQueue.get()
@@ -1432,12 +1489,20 @@ class SMthread(threading.Thread):
 
 
 
+
+# 솔버와 통신이 진짜여기 
+
             # add all the new solutions send by the solver
             while not self.solutionsQueue.empty():
                 queueElement = self.solutionsQueue.get()
                 if queueElement[0] == 'updateBestSolution':
                     # new best solution from the solver via the simulator listener thread
                     newSolution = json.loads(queueElement[1])
+
+
+                    # newSolution, myGraph.data, myCarrier, myScenario, myCustomer.data["TimeSlots"] 파라미터이용해서 짜기 
+                    #  
+
                     if self.mySolutions.isSolutionValid(newSolution, myGraph.data, myCarrier, myScenario, myCustomer.data["TimeSlots"]):
                         if self.scriptMode:
                             # print('   New VALID solution, total of  : ' + str(len(self.mySolutions.data['Solutions'])), end = '\r' )

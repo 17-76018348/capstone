@@ -28,8 +28,14 @@ if len(sys.argv) == 1: # system input nothing
 
 	# create and launch the thread managing the user input
 	commandQueue = queue.Queue(30)
+
+	# receive input from user
+	# select mode to enter  
 	commandThread = UserInputManager.UIMthread(commandQueue, eventCommand, eventSMQueue, eventLock) # in terminal auto input 
 	commandThread.start()
+	# eventcommand wait() && flag 0
+	# eventSMqueue flag 1
+
 	threads.append(commandThread)
 
 	#create and launch the simulation manager thread

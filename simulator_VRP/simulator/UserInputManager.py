@@ -12,7 +12,7 @@ from prompt_toolkit import prompt
 from prompt_toolkit.history import FileHistory
 from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from prompt_toolkit.completion import WordCompleter
-
+import time
 
 
 
@@ -66,28 +66,47 @@ class UIMthread(threading.Thread):
         'startOnlineSimulation',
         'stopSimulation',
         'test',
-        'testConnection' ], ignore_case = True)
+        'testConnection',
+        'solve' ], ignore_case = True)
         
     def run(self):
         exitFlag = False
         while not exitFlag:
             
             #TODO: rajouter un lock sur la fonction input pour pas faire buger un éventuel print dans la commande précédente
+            # auto make 자동완성 기능
+            # save inserted command to history.txt
             command = prompt('--:', history = FileHistory('history.txt'),
                 auto_suggest = AutoSuggestFromHistory(),
                 completer = self.commandCompleter,
                 )
 
-            
+            # program exit
             if command.split() == ['close']:
                 exitFlag = True
             
+            # enter mode except exit mode
             if command != '':
+                """
+                Event 
+                set -> make flag 1
+                clear -> make flag 0
+                wait -> if flag = 1 return else if flag = 0 waiting for 1
+                isSet -> return flag
+                """
+                # share data permission lock
                 self.eventLock.acquire()
+
+                # set thread event flag 0
                 self.eventCommand.clear()
                 self.commandQueue.put(command)
+
+                # set thread event flag 1
                 self.eventSMQueue.set()
                 self.eventLock.release()
+                # share data permission release
+
+                # if flag = 1 return else if flag = 0 wait for being 1
                 self.eventCommand.wait()
 
 

@@ -308,6 +308,12 @@ class simulationOnlineThread(threading.Thread):
                         if request['RevealTime'] == timeUnit + 1:
                             numberRequestToSend += 0.5
                         if request['RevealTime'] == timeUnit:
+                            # first fit 알고리즘
+                            # request fetching 
+			# The load of the road must not exceed vehicle's capacity
+#체크포인트
+
+
                             msg = json.dumps(request)
                             msg = '{"NewRequests" : ' + msg + "}"
                             self.simuAPI.sendNewRequestsJsonToSolver(msg)
