@@ -16,9 +16,11 @@ import json
 class Solution:
 	def __init__(self):
 		self.data = {"NumberOfSolutions" : 0, "Solutions" : [], "SolutionsNotValid" : [], 'UserSolution' : []}
-		self.realDurationPerTimeUnit = None
-		self.realTimeUnit = None
-		self.carrierUnit = None
+		
+		# 원래 none이었는데 임시로 했다
+		self.realDurationPerTimeUnit = 60
+		self.realTimeUnit = "Second"
+		self.carrierUnit = "Second"
 		self.convertDic = {'Second':1, 'Minute':60, 'Hour':3600}
 		self.acceptedRequest = [] # a tab with the accepted/rejected request and the time when it was decided by the solver
 		self.acceptedrequest = set({})
@@ -81,7 +83,7 @@ class Solution:
 			# print(notServedRequest)
 			return False
 
-		return solution
+		return returnValue
 
 
 
@@ -91,6 +93,8 @@ class Solution:
 		return True if the request was in the road and was deleted
 		return False otherwise
 		"""
+
+
 		road = self.data['UserSolution'][-1]['Routes'][roadId]
 		for i in range(0, len(road)):
 			if 'RequestInstanceId' in road[i] and road[i]['RequestInstanceId'] == int(requestId):
@@ -158,6 +162,8 @@ class Solution:
 			print('\n Solution resumed : --> [nodeId, requestId] -> [] -> etc... ')
 			#requestServed    = []
 			#requestNotServed = []
+
+			
 			for roadId in self.data['Solutions'][-1]['Routes']:
 				road = ''
 				for node in self.data['Solutions'][-1]['Routes'][roadId]:
@@ -216,12 +222,14 @@ class Solution:
 			print('ERROR: input files missing')
 			return False
 
+		# 현재 들어온 new request가 이미 결정된 requst인가?
 		for road in self.data['UserSolution'][-1]['Routes']:
 			for node in self.data['UserSolution'][-1]['Routes'][road]:
 				if 'RequestInstanceId' in node and  node['RequestInstanceId'] == int(requestId):
 					print('ERROR: request '+requestId+' already in road '+road)
 					return False
 
+		
 		for req in myScenario.data['Requests']:
 			# extract the request from the scenario
 			if req['RequestId'] == int(requestId):
@@ -322,14 +330,18 @@ class Solution:
 
 		if validSolution:
 			if not self.isServingAcceptedRequest(solution):
+				print("이건뭔문제")
 				validSolution = False
+			#안걸림..!
 			# if the solution is loaded from a file, it can not served the accepted request.
 			if validSolution or loadedSolution:
 				for roadId, road in solution['Routes'].items():
 					if not carrierObj.getVehicleOfId(roadId):
+						print("id겟팅해오는데 문제")
 						validSolution = False
 						break;
 					if not self.isRoadValid(roadId, road, myGraph, carrierObj, myScenario, timeslots):
+						print("road자체가 valid하지않음")
 						validSolution = False
 						break;
 		return validSolution
@@ -337,7 +349,16 @@ class Solution:
 	def isRoadValid(self, roadId, road, myGraph, carrierObj, myScenario, timeslots):
 		"""
 			Verify if a single road is valid
+			input: 
+				1) road id =veh. id =우리가 가정. =예) 1~100 --> 루프물
+				2) road = road id 따른 Value 값들 
+				3) myGraph, carrierObj, myScenario ==> 그대로.. 
+				4) timeslot은 myCustomer.data["TimeSlots"]  
+
+
 		"""
+
+		# ruturn을 false를 했는데,, 어떤 문장떄문에?>?
 		vehicleType = carrierObj.data['Vehicles'][roadId]['VehicleType']
 		previousNode = None
 		vehicleCharge = 0
@@ -351,6 +372,8 @@ class Solution:
 					return False
 				else:
 					requestServed[node['RequestId']] = True
+
+			
 
 			# The load of the road must not exceed vehicle's capacity
 			additionalCharge = self.getNewChargeAt(node, myScenario)
@@ -375,6 +398,8 @@ class Solution:
 				if not self.isTravelTimeValid(previousNode, node, carrierObj, vehicleType, timeslots):
 					print('travel time not respected')
 					return False
+				#이부분 주석다시 풀어야함 체크포인트
+				pass
 				# if not self.isTimeWindowValid(node, myScenario, carrierObj):
 				# 	return False
 			previousNode = node
@@ -410,6 +435,7 @@ class Solution:
 						
 
 
+#퍼포먼스 측정용
 	def isTimeWindowValid(self, node, myScenario, carrierObj):
 		"""
 			Check if the timeWindows of the requests served at the given node of the road
@@ -436,6 +462,14 @@ class Solution:
 	def isTravelTimeValid(self, oldNode, newNode, carrierObj, vehicleType, timeslots):
 		"""
 			Check if the travel time between two nodes is not too short
+			가설1: too short 면 좋은거임!! 그래서 
+			단순 short인지 check하는 함수임 (유력)
+
+			가설2:too short면 안좋은거임?
+
+			어떤 time unit에서 실제 소요시간이 과연, normal time보다 작을지. 작으면 false!
+			실제가 더 오래걸려야 한다.
+
 		"""
 		timeDiff = (newNode['ArrivalTime']-oldNode['DepartureTime'])*self.realDurationPerTimeUnit
 		timeDiff = timeDiff*self.convertDic[self.realTimeUnit]/self.convertDic[carrierObj.data['Unit']]
@@ -451,6 +485,7 @@ class Solution:
 				break
 		normalTime = carrierObj.getTravelTime(oldNodeId, newNodeId, vehicleType, timeslot)
 		if timeDiff < normalTime:
+			# 실제 소요시간 < 예측시간
 			if normalTime == 0 or timeDiff/normalTime < 0.999:
 				return False
 			else:

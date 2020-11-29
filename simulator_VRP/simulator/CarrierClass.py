@@ -90,6 +90,7 @@ class Carrier:
 	def getTravelTime(self, startNode, endNode, vehicleType, timeSlotStart):
 		"""
 		return the travel time from startNode to endNode when starting at timeSlotStart
+		
 		"""
 		if timeSlotStart == 0:
 			timeSlotStart = 1

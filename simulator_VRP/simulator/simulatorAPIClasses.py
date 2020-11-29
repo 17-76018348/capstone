@@ -132,10 +132,11 @@ class simulatorAPI:
             self.handleGrpcError(e, 'Error when sending newRequests to solver')
 
     def setCurrentSolution(self, jsonMsg):
-        try:
-            self.stub.setCurrentSolution(vrpAPI_pb2.JsonMessage(jsonstring=jsonMsg))
-        except grpc.RpcError as e:
-            self.handleGrpcError(e, 'Error when sending currentSolution to solver')
+        # try:
+        #     self.stub.setCurrentSolution(vrpAPI_pb2.JsonMessage(jsonstring=jsonMsg))
+        # except grpc.RpcError as e:
+        #     self.handleGrpcError(e, 'Error when sending currentSolution to solver')
+        pass
 
     def startSimulation(self):
         try:

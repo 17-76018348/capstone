@@ -448,6 +448,11 @@ class SMthread(threading.Thread):
                 elif commandSplit[0] == 'loadCarrier':
                     # only if presimulation
                     if self.simulationStatus in ['PreSimulation']:
+                        # online dataset
+                        # command = 'loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Carrier.json'
+
+                        # offline dataset
+                        command = 'loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/carrier.json'
                         command = command.replace('loadCarrier ', '', 1).rstrip()
                         if myCarrier.loadFile(command):
                             # add to NotSent remove form Sent
@@ -466,6 +471,10 @@ class SMthread(threading.Thread):
 
                 elif commandSplit[0] == 'loadCustomer':
                     if self.simulationStatus in ['PreSimulation']:
+                        # online dataset
+                        # command = 'loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Customers.json'
+                        # offline dataset
+                        command = 'loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Customer.json'
                         command = command.replace('loadCustomer ', '', 1).rstrip()
                         if myCustomer.loadFile(command):
                             # add to NotSent
@@ -506,6 +515,11 @@ class SMthread(threading.Thread):
 
                 elif commandSplit[0] == 'loadGraph':
                     if self.simulationStatus in ['PreSimulation']:
+                        # online dataset
+                        # command = 'loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Graph.json'
+                        # offline dataset
+                        command = 'loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
+
                         command = command.replace('loadGraph ', '', 1).rstrip()
                         if myGraph.loadFile(command):
                             self.addToDataNotSent('Graph')
@@ -524,6 +538,10 @@ class SMthread(threading.Thread):
                        
                 elif commandSplit[0] == 'loadScenario':
                     if self.simulationStatus in ['PreSimulation']:
+                        # online dataset
+                        # command = 'loadScenario /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Scenario.json'
+                        # offline dataset
+                        command = 'loadScenario /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/scenario.json'
                         command = command.replace('loadScenario ', '', 1).rstrip()
                         if myScenario.loadFile(command):
                             if 'ComputationTime' not in myScenario.data and 'ComputationTime' in myFiles:
@@ -1189,22 +1207,24 @@ class SMthread(threading.Thread):
                                     self.dataNotSent = []
 
                                 # inform user if some data need to be sent before starting simulation
-                                elif len(self.dataNotSent) > 0:
-                                    errorMsg = 'The file(s) '
-                                    allDataWasSent = False
-                                    for data in self.dataNotSent:
-                                        if data != 'OfflineTime':
-                                            errorMsg += '"'+data+'"'
-                                            print('   Error: '+data+' was not sent to the solver')
-                                            print('       please send '+data+' before starting the simulation')
-                                    self.sendToGUI(('error', errorMsg + ' were not sent to the solver. Impossible to start the offline Simulation'))
+                                # elif len(self.dataNotSent) > 0:
+                                #     errorMsg = 'The file(s) '
+                                #     allDataWasSent = False
+                                #     for data in self.dataNotSent:
+                                #         if data != 'OfflineTime':
+                                #             errorMsg += '"'+data+'"'
+                                #             print('   Error: '+data+' was not sent to the solver')
+                                #             print('       please send '+data+' before starting the simulation')
+                                #     self.sendToGUI(('error', errorMsg + ' were not sent to the solver. Impossible to start the offline Simulation'))
 
                                 if allDataWasSent:
                                     myScenario.markInitialRequest(myCustomer.data)
                                     self.mySolutions.realDurationPerTimeUnit = myCustomer.data['RealDurationPerTimeUnit']
                                     self.mySolutions.realTimeUnit = myCustomer.data['RealTimeUnit']
                                     self.mySolutions.carrierUnit = myCarrier.data['Unit']
-                                    mySimulation = Simulation.simulationOfflineThread(myScenario, self.downQueue, self.upQueue, self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, self.logFile)                        
+
+                                    mySimulation = Simulation.simulationOfflineThread(myScenario, self.downQueue, self.upQueue,self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, myCarrier, self.mySolutions, myCustomer, myGraph,self.logFile)                        
+                                    #mySimulation = Simulation.simulationOfflineThread(myScenario, self.downQueue, self.upQueue, self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, self.logFile)                        
                                     mySimulation.start()
                                     simulationThreadLaunched = True
                                     self.changeStatusTo('OfflineComputation')
@@ -1235,8 +1255,10 @@ class SMthread(threading.Thread):
                             print('   A simulation is already running')
                         else:
                             connectionOK = dataAvailable = True
-                            initialSolution = self.mySolutions.containsValidInitialOfflineSolution(myScenario)
+                            initialSolution = True
                             # check all necessary data is here
+                            
+
                             if not myCustomer.data or not myGraph.data or not myScenario.data or not myCarrier.data or'ComputationTime' not in myFiles or initialSolution == False :
                                 print('    cannot launch simulation due to the following problems:')
                                 dataAvailable = False
@@ -1262,31 +1284,32 @@ class SMthread(threading.Thread):
                                 allDataWasSent = True
 
                                 # send computation time if not sent, but ignore offline time
-                                if all([i == 'ComputationTime' or i == 'OfflineTime' for i in self.dataNotSent ]):
-                                    # send an initial solution
-                                    self.simuAPI.setCurrentSolution(json.dumps(initialSolution))
-                                    for data in self.dataNotSent:
-                                        if data == 'ComputationTime':
-                                            jsonMsg = '{ "' + data + '" :' + str(json.dumps(myFiles[data])) + '}'
-                                            # grpc communication
-                                            # self.simuAPI.sendFile(jsonMsg)
-                                            self.addToDataSent(data)
-                                    self.dataNotSent = []
+                                # if all([i == 'ComputationTime' or i == 'OfflineTime' for i in self.dataNotSent ]):
+                                #     # send an initial solution
+                                #     self.simuAPI.setCurrentSolution(json.dumps(initialSolution))
+                                #     for data in self.dataNotSent:
+                                #         if data == 'ComputationTime':
+                                #             jsonMsg = '{ "' + data + '" :' + str(json.dumps(myFiles[data])) + '}'
+                                #             # grpc communication
+                                #             # self.simuAPI.sendFile(jsonMsg)
+                                #             self.addToDataSent(data)
+                                #     self.dataNotSent = []
 
                                 # inform user if some data need to be sent before starting simulation
-                                elif len(self.dataNotSent) > 0:
-                                    allDataWasSent = False
-                                    for data in self.dataNotSent:
-                                        if data != 'ComputationTime':
-                                            print('   Error: '+data+' was not sent to the solver')
-                                            print('       please send '+data+' before starting the simulation')
-
+                                # elif len(self.dataNotSent) > 0:
+                                #     allDataWasSent = False
+                                #     for data in self.dataNotSent:
+                                #         if data != 'ComputationTime':
+                                #             print('   Error: '+data+' was not sent to the solver')
+                                #             print('       please send '+data+' before starting the simulation')
+                                print("online 확인용")
                                 if allDataWasSent:
                                     self.mySolutions.realDurationPerTimeUnit = myCustomer.data['RealDurationPerTimeUnit']
                                     self.mySolutions.realTimeUnit = myCustomer.data['RealTimeUnit']
                                     self.mySolutions.carrierUnit = myCarrier.data['Unit']
 
-                                    mySimulation = Simulation.simulationOnlineThread(myScenario, self.downQueue, self.upQueue, myCustomer.data["HorizonSize"], self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, self.logFile)                        
+#체크포인트
+                                    mySimulation = Simulation.simulationOnlineThread(myScenario, self.downQueue, self.upQueue,self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, myCarrier, self.mySolutions, myCustomer, myGraph,self.logFile)                        
                                     mySimulation.start()
                                     simulationThreadLaunched = True
                                     self.changeStatusTo('OnlineComputation')
@@ -1489,11 +1512,13 @@ class SMthread(threading.Thread):
 
 
 
+            print("여기가문제냐1")
 
 # 솔버와 통신이 진짜여기 
-
             # add all the new solutions send by the solver
             while not self.solutionsQueue.empty():
+                print("여기가문제냐2")
+
                 queueElement = self.solutionsQueue.get()
                 if queueElement[0] == 'updateBestSolution':
                     # new best solution from the solver via the simulator listener thread

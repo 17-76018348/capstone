@@ -72,19 +72,19 @@
         },
         {
             "ArrivalProbability": [
-                50,
+                100,
                 0,
                 0,
                 0
             ],
-            "Demand": 10,
+            "Demand": 1,
             "Node": 2,
             "RequestId": 4,
             "ServiceDuration": 10,
             "TimeWindow": {
                 "TWType": "absolute",
-                "end": 139,
-                "start": 109
+                "end": 240,
+                "start": 0
             }
         },
         {

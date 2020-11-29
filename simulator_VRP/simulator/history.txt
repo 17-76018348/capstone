@@ -24396,3 +24396,1077 @@
 
 # 2020-11-26 18:11:02.631991
 +close
+
+# 2020-11-28 01:38:44.853734
++loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Carrier.json
+
+# 2020-11-28 01:39:48.482581
++loadScenario /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Scenario.json
+
+# 2020-11-28 01:39:54.057853
++loadCustomer
+
+# 2020-11-28 01:40:55.046569
++loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Customers.json
+
+# 2020-11-28 01:41:55.939334
++loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Graph.json
+
+# 2020-11-28 01:42:15.371562
++setComputationTime 1.0
+
+# 2020-11-28 01:42:30.138660
++setOfflineTime 30
+
+# 2020-11-28 01:44:00.041774
++startOfflineSimulation
+
+# 2020-11-28 01:44:39.064523
++startOnlineSimulation
+
+# 2020-11-28 02:00:02.906439
++close
+
+# 2020-11-28 02:00:31.175071
++loadScenario 1
+
+# 2020-11-28 02:00:41.059939
++close
+
+# 2020-11-28 02:02:27.065680
++loadGraph
+
+# 2020-11-28 02:02:31.850616
++loadGraph 1
+
+# 2020-11-28 02:04:24.478285
++close
+
+# 2020-11-28 02:04:32.439518
++loadGraph 1
+
+# 2020-11-28 02:04:36.480837
++close
+
+# 2020-11-28 02:09:31.174013
++loadGraph 1
+
+# 2020-11-28 02:09:42.188828
++loadScenario 1
+
+# 2020-11-28 02:10:02.026132
++loadCarrier 1
+
+# 2020-11-28 02:10:21.769215
++loadCustomer 1
+
+# 2020-11-28 02:10:29.494718
++setComputationTime 1.0
+
+# 2020-11-28 02:10:45.731305
++setOfflineTime 30
+
+# 2020-11-28 02:10:59.248904
++startOfflineSimulation
+
+# 2020-11-28 02:18:14.318623
++loadGraph 1
+
+# 2020-11-28 02:18:19.740624
++loadScenario 1
+
+# 2020-11-28 02:18:25.012354
++loadCarrier 1
+
+# 2020-11-28 02:18:28.133902
++loadCustomer 1
+
+# 2020-11-28 02:18:36.767674
++setComputationTime 1.0
+
+# 2020-11-28 02:18:41.302835
++setOfflineTime 30
+
+# 2020-11-28 02:18:49.754122
++startOfflineSimulation
+
+# 2020-11-28 02:31:04.929795
++loadGraph 1
+
+# 2020-11-28 02:31:09.349416
++loadScenario 1
+
+# 2020-11-28 02:31:12.012883
++loadCarrier 1
+
+# 2020-11-28 02:31:16.873722
++loadCustomer 1
+
+# 2020-11-28 02:31:21.339840
++setComputationTime 1.0
+
+# 2020-11-28 02:31:24.869545
++setOfflineTime 30
+
+# 2020-11-28 02:31:30.633261
++startOfflineSimulation
+
+# 2020-11-28 02:32:51.776799
++
+
+# 2020-11-28 02:33:07.187161
++close
+
+# 2020-11-28 02:33:15.111698
++loadGraph 1
+
+# 2020-11-28 02:33:18.001127
++loadCustomer 1
+
+# 2020-11-28 02:33:22.509346
++loadCarrier 1
+
+# 2020-11-28 02:33:28.826507
++loadScenario 1
+
+# 2020-11-28 02:33:33.002563
++setComputationTime 1.0
+
+# 2020-11-28 02:33:38.219118
++setOfflineTime 30
+
+# 2020-11-28 02:33:45.498157
++startOfflineSimulation
+
+# 2020-11-28 02:37:52.026867
++loadGraph 1
+
+# 2020-11-28 02:37:53.783002
++loadCarrier 1
+
+# 2020-11-28 02:37:56.515060
++loadCustomer 1
+
+# 2020-11-28 02:37:57.731009
++loadGraph 1
+
+# 2020-11-28 02:38:01.434051
++setComputationTime 1.0
+
+# 2020-11-28 02:38:05.729248
++loadScenario 1
+
+# 2020-11-28 02:38:12.531924
++setOfflineTime 30
+
+# 2020-11-28 02:38:17.161249
++startOfflineSimulation
+
+# 2020-11-28 02:59:21.603985
++loadGraph 1
+
+# 2020-11-28 02:59:27.247421
++loadCustomer 1
+
+# 2020-11-28 02:59:38.063216
++loadScenario 1
+
+# 2020-11-28 02:59:43.811662
++loadCarrier 1
+
+# 2020-11-28 02:59:55.822703
++setComputationTime 1.0
+
+# 2020-11-28 03:00:00.604925
++setOfflineTime 30
+
+# 2020-11-28 03:00:05.280857
++startOfflineSimulation
+
+# 2020-11-28 03:02:34.895416
++
+
+# 2020-11-28 03:02:49.662313
++loadGraph 1
+
+# 2020-11-28 03:02:52.109249
++loadScenario 1
+
+# 2020-11-28 03:02:56.985884
++loadCustomer 1
+
+# 2020-11-28 03:03:00.243994
++loadCarrier 1
+
+# 2020-11-28 03:03:03.378489
++setOfflineTime 30
+
+# 2020-11-28 03:03:06.545251
++setComputationTime 1.0
+
+# 2020-11-28 03:03:08.163647
++setOfflineTime 30
+
+# 2020-11-28 03:03:13.544900
++startOfflineSimulation
+
+# 2020-11-28 03:05:29.547223
++
+
+# 2020-11-28 03:05:43.030491
++loadGraph 1
+
+# 2020-11-28 03:05:47.207883
++loadScenario 1
+
+# 2020-11-28 03:05:48.791570
++loadGraph 1
+
+# 2020-11-28 03:05:54.575750
++loadCarrier 1
+
+# 2020-11-28 03:05:58.563919
++setOfflineTime 30
+
+# 2020-11-28 03:06:01.537179
++setComputationTime 1.0
+
+# 2020-11-28 03:06:13.224460
++loadCustomer 1
+
+# 2020-11-28 03:06:18.714178
++startOfflineSimulation
+
+# 2020-11-28 03:16:17.355066
++startOnlineSimulation
+
+# 2020-11-28 03:17:14.110839
++loadCustomer 1
+
+# 2020-11-28 03:17:17.700320
++loadGraph 1
+
+# 2020-11-28 03:17:19.557706
++loadCustomer 1
+
+# 2020-11-28 03:17:23.649960
++loadCarrier 1
+
+# 2020-11-28 03:17:27.495420
++setComputationTime 1.0
+
+# 2020-11-28 03:17:34.544937
++loadScenario 1
+
+# 2020-11-28 03:17:40.690593
++setOfflineTime 30
+
+# 2020-11-28 03:17:45.396032
++startOfflineSimulation
+
+# 2020-11-28 03:18:13.635158
++startOnl
+
+# 2020-11-28 03:18:22.816543
++startOnlineSimulation
+
+# 2020-11-28 03:21:51.774863
++loadCarrier 1
+
+# 2020-11-28 03:21:54.766978
++loadScenario 1
+
+# 2020-11-28 03:22:00.812356
++loadCustomer 1
+
+# 2020-11-28 03:22:07.970896
++loadGraph 1
+
+# 2020-11-28 03:22:11.901871
++setOfflineTime 30
+
+# 2020-11-28 03:22:16.520503
++setComputationTime 1.0
+
+# 2020-11-28 03:22:20.822642
++startOfflineSimulation
+
+# 2020-11-28 03:22:27.186331
++startOnlineSimulation
+
+# 2020-11-28 03:26:42.104867
++close
+
+# 2020-11-28 03:26:48.993995
++loadGraph 1
+
+# 2020-11-28 03:26:52.619462
++loadCustomer 1
+
+# 2020-11-28 03:26:57.300249
++loadScenario 1
+
+# 2020-11-28 03:27:04.937922
++loadCarrier 1
+
+# 2020-11-28 03:27:08.186214
++setComputationTime 1.0
+
+# 2020-11-28 03:27:11.279983
++setOfflineTime 30
+
+# 2020-11-28 03:27:15.595883
++startOfflineSimulation
+
+# 2020-11-28 03:27:23.219238
++startOnlineSimulation
+
+# 2020-11-28 03:29:51.015954
++close
+
+# 2020-11-28 03:30:00.194441
++loadCarrier 1
+
+# 2020-11-28 03:30:04.969744
++loadCustomer 1
+
+# 2020-11-28 03:30:10.922447
++loadGraph 1
+
+# 2020-11-28 03:30:18.834301
++loadScenario 1
+
+# 2020-11-28 03:30:22.210389
++setOfflineTime 30
+
+# 2020-11-28 03:30:27.100300
++setComputationTime 1.0
+
+# 2020-11-28 03:30:34.142651
++startOfflineSimulation
+
+# 2020-11-28 03:30:41.043833
++startOnlineSimulation
+
+# 2020-11-28 03:35:53.241619
++close
+
+# 2020-11-28 03:36:00.261014
++loadGraph 1
+
+# 2020-11-28 03:36:03.838766
++loadCustomer 1
+
+# 2020-11-28 03:36:07.340957
++loadScenario 1
+
+# 2020-11-28 03:36:23.380201
++loadCarrier 1
+
+# 2020-11-28 03:36:28.106960
++setComputationTime 1.0
+
+# 2020-11-28 03:36:31.711230
++setOfflineTime 30
+
+# 2020-11-28 03:36:35.430622
++startOfflineSimulation
+
+# 2020-11-28 03:36:46.547904
++startOnlineSimulation
+
+# 2020-11-28 03:41:04.153792
++clos
+
+# 2020-11-28 03:41:07.185633
++close
+
+# 2020-11-28 03:41:14.769615
++loadCustomer 1
+
+# 2020-11-28 03:41:17.733627
++loadScenario 1
+
+# 2020-11-28 03:41:24.957373
++loadGraph 1
+
+# 2020-11-28 03:41:37.219437
++loadCarrier 1
+
+# 2020-11-28 03:41:40.802162
++setComputationTime 1.0
+
+# 2020-11-28 03:41:44.191575
++setOfflineTime 30
+
+# 2020-11-28 03:41:50.476329
++startOfflineSimulation
+
+# 2020-11-28 03:42:02.494264
++startOnlineSimulation
+
+# 2020-11-28 03:43:21.799362
++close
+
+# 2020-11-28 03:43:28.764045
++loadCarrier 1
+
+# 2020-11-28 03:43:32.532053
++loadGraph 1
+
+# 2020-11-28 03:43:36.073356
++loadScenario 1
+
+# 2020-11-28 03:43:47.760713
++loadCustomer 1
+
+# 2020-11-28 03:43:53.600795
++setComputationTime 1.0
+
+# 2020-11-28 03:44:04.333952
++setOfflineTime 30
+
+# 2020-11-28 03:44:10.950306
++startOfflineSimulation
+
+# 2020-11-28 03:44:17.093806
++startOnlineSimulation
+
+# 2020-11-28 04:20:08.530154
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 04:20:56.894983
++loadUserSolutions /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 04:21:30.045069
++loadCarrier 1
+
+# 2020-11-28 04:21:34.335424
++loadScenario 1
+
+# 2020-11-28 04:21:40.768856
++loadCustomer 1
+
+# 2020-11-28 04:21:50.032134
++loadGraph 1
+
+# 2020-11-28 04:21:54.544313
++setComputationTime 1.0
+
+# 2020-11-28 04:21:59.348664
++setOfflineTime 30
+
+# 2020-11-28 04:22:04.365543
++startOfflineSimulation
+
+# 2020-11-28 04:22:22.085255
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 04:25:04.766690
++loadCarrier 1
+
+# 2020-11-28 04:25:08.594716
++loadScenario 1
+
+# 2020-11-28 04:25:13.755144
++loadCustomer 1
+
+# 2020-11-28 04:25:16.720266
++loadGraph 1
+
+# 2020-11-28 04:25:20.199936
++setComputationTime 1.0
+
+# 2020-11-28 04:25:23.640591
++setOfflineTime 30
+
+# 2020-11-28 04:25:29.307638
++startOfflineSimulation
+
+# 2020-11-28 04:25:41.756597
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 04:35:43.116961
++close
+
+# 2020-11-28 04:35:48.932446
++startOfflineSimulation
+
+# 2020-11-28 04:35:58.889048
++close
+
+# 2020-11-28 04:36:05.388500
++loadCarrier 1
+
+# 2020-11-28 04:36:10.319844
++loadScenario 1
+
+# 2020-11-28 04:36:15.712559
++loadCustomer 1
+
+# 2020-11-28 04:36:22.137307
++loadGraph 1
+
+# 2020-11-28 04:36:27.351859
++setComputationTime 1.0
+
+# 2020-11-28 04:36:32.789642
++setOfflineTime 30
+
+# 2020-11-28 04:36:36.999422
++startOfflineSimulation
+
+# 2020-11-28 04:37:14.512368
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 04:42:51.478420
++close
+
+# 2020-11-28 04:42:59.299169
++loadCarrier 1
+
+# 2020-11-28 04:43:02.274688
++loadScenario 1
+
+# 2020-11-28 04:43:06.258890
++loadCustomer 1
+
+# 2020-11-28 04:43:16.651803
++close
+
+# 2020-11-28 04:44:07.800285
++loadCarrier 1
+
+# 2020-11-28 04:44:12.451745
++loadScenario 1
+
+# 2020-11-28 04:44:17.534523
++loadCustomer 1
+
+# 2020-11-28 04:44:25.963280
++loadGraph 1
+
+# 2020-11-28 04:44:30.524983
++setComputationTime 1.0
+
+# 2020-11-28 04:44:34.824124
++setOfflineTime 30
+
+# 2020-11-28 04:44:40.860963
++startOfflineSimulation
+
+# 2020-11-28 04:46:11.671821
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 04:59:10.322754
++close
+
+# 2020-11-28 04:59:22.006487
++loadCarrier 1
+
+# 2020-11-28 04:59:26.649093
++loadScenario 1
+
+# 2020-11-28 05:00:12.722963
++close
+
+# 2020-11-28 05:00:24.355078
++loadCarrier 1
+
+# 2020-11-28 05:00:28.994505
++loadScenario 1
+
+# 2020-11-28 05:01:06.333083
++startOfflineSimulation
+
+# 2020-11-28 05:01:12.171363
++close
+
+# 2020-11-28 05:01:21.242352
++loadCarrier 1
+
+# 2020-11-28 05:01:24.454941
++loadScenario 1
+
+# 2020-11-28 05:01:33.350338
++loadCustomer 1
+
+# 2020-11-28 05:01:41.922982
++loadGraph 1
+
+# 2020-11-28 05:01:51.122792
++setComputationTime 1.0
+
+# 2020-11-28 05:01:59.787437
++setOfflineTime 30
+
+# 2020-11-28 05:02:06.130529
++startOfflineSimulation
+
+# 2020-11-28 05:02:50.795298
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 05:03:07.587156
++close
+
+# 2020-11-28 05:11:48.653957
++loadCustomer 1
+
+# 2020-11-28 05:11:54.358986
++loadGraph 1
+
+# 2020-11-28 05:12:02.348712
++loadScenario 1
+
+# 2020-11-28 05:12:09.775723
++loadCarrier 1
+
+# 2020-11-28 05:12:14.192577
++setComputationTime 1.0
+
+# 2020-11-28 05:12:17.914356
++setOfflineTime 30
+
+# 2020-11-28 05:12:26.970738
++startOfflineSimulation
+
+# 2020-11-28 05:12:33.811600
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 05:17:21.944011
++close
+
+# 2020-11-28 05:17:31.159865
++loadCustomer 1
+
+# 2020-11-28 05:17:37.249057
++loadGraph 1
+
+# 2020-11-28 05:17:43.029889
++loadScenario 1
+
+# 2020-11-28 05:17:52.292644
++loadCarrier 1
+
+# 2020-11-28 05:17:59.274620
++setComputationTime 1.0
+
+# 2020-11-28 05:18:04.770191
++setOfflineTime 30
+
+# 2020-11-28 05:18:13.275220
++startOfflineSimulation
+
+# 2020-11-28 05:18:36.147000
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 05:28:03.937082
++loadCustomer 1
+
+# 2020-11-28 05:28:09.180186
++loadCarrier 1
+
+# 2020-11-28 05:28:14.125662
++loadScenario 1
+
+# 2020-11-28 05:28:21.911087
++loadGraph 1
+
+# 2020-11-28 05:28:25.786012
++setOfflineTime 30
+
+# 2020-11-28 05:28:31.390163
++setComputationTime 1.0
+
+# 2020-11-28 05:28:43.128825
++startOfflineSimulation
+
+# 2020-11-28 05:28:48.798781
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 05:32:00.711496
++loadScenario 1
+
+# 2020-11-28 05:32:05.180299
++loadGraph 1
+
+# 2020-11-28 05:32:10.891147
++loadCarrier 1
+
+# 2020-11-28 05:32:17.347620
++loadCustomer 1
+
+# 2020-11-28 05:32:22.542022
++setComputationTime 1.0
+
+# 2020-11-28 05:32:26.510837
++setOfflineTime 30
+
+# 2020-11-28 05:32:32.373438
++startOfflineSimulation
+
+# 2020-11-28 05:32:39.449834
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-28 05:33:03.044546
++startOnlineSimulation
+
+# 2020-11-28 05:40:27.532546
++close
+
+# 2020-11-29 20:58:59.784838
++loadCarrier 1
+
+# 2020-11-29 20:59:02.915151
++loadCustomer
+
+# 2020-11-29 20:59:19.802915
++loadGraph 1
+
+# 2020-11-29 20:59:25.250383
++loadScenario 1
+
+# 2020-11-29 20:59:29.993106
++setComputationTime 1.0
+
+# 2020-11-29 20:59:42.168192
++setOfflineTime 30
+
+# 2020-11-29 20:59:47.008564
++startOfflineSimulation
+
+# 2020-11-29 20:59:51.963181
++startOnlineSimulation
+
+# 2020-11-29 21:03:59.705928
++saveSolutions /home/yang/Desktop/solution_v1.txt
+
+# 2020-11-29 21:39:29.796994
++close
+
+# 2020-11-29 21:39:56.706168
++loadCarrier 1
+
+# 2020-11-29 21:40:01.792453
++loadCustomer 1
+
+# 2020-11-29 21:40:04.962405
++loadGraph 1\
+
+# 2020-11-29 21:40:09.361669
++loadScenario 1
+
+# 2020-11-29 21:40:13.746817
++setComputationTime 1.0
+
+# 2020-11-29 21:40:17.127411
++setOfflineTime 30
+
+# 2020-11-29 21:40:25.880711
++startOfflineSimulation
+
+# 2020-11-29 21:40:32.919391
++startOnlineSimulation
+
+# 2020-11-29 22:42:36.712856
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-29 22:56:49.110236
++loadCarrier 1
+
+# 2020-11-29 22:56:54.888944
++loadCustomer 1
+
+# 2020-11-29 22:57:03.198211
++loadGraph 1\
+
+# 2020-11-29 22:57:08.520488
++loadScenario 1
+
+# 2020-11-29 22:57:12.889669
++setComputationTime 1.0
+
+# 2020-11-29 22:57:16.747391
++setOfflineTime 30
+
+# 2020-11-29 22:57:34.567511
++startOfflineSimulation
+
+# 2020-11-29 22:57:47.451720
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-29 23:06:17.925559
++loadCarrier 1
+
+# 2020-11-29 23:06:24.253484
++loadCustomer 1
+
+# 2020-11-29 23:06:29.150626
++loadGraph 1\
+
+# 2020-11-29 23:06:33.929212
++loadScenario 1
+
+# 2020-11-29 23:06:38.877067
++setComputationTime 1.0
+
+# 2020-11-29 23:06:44.010752
++setOfflineTime 30
+
+# 2020-11-29 23:07:06.299026
++startOfflineSimulation
+
+# 2020-11-29 23:08:07.755135
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-29 23:23:27.596510
++loadCarrier 1
+
+# 2020-11-29 23:23:32.457833
++loadCustomer 1
+
+# 2020-11-29 23:23:36.284775
++loadGraph 1\
+
+# 2020-11-29 23:23:42.850662
++loadScenario 1
+
+# 2020-11-29 23:23:50.443905
++setComputationTime 1.0
+
+# 2020-11-29 23:23:59.529364
++setOfflineTime 30
+
+# 2020-11-29 23:24:09.416445
++startOfflineSimulation
+
+# 2020-11-29 23:24:26.409659
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-29 23:46:05.035675
++loadCarrier 1
+
+# 2020-11-29 23:46:07.967819
++loadCustomer 1
+
+# 2020-11-29 23:46:10.805029
++loadGraph 1\
+
+# 2020-11-29 23:46:15.808780
++loadScenario 1
+
+# 2020-11-29 23:46:19.245730
++setComputationTime 1.0
+
+# 2020-11-29 23:46:23.019027
++setOfflineTime 30
+
+# 2020-11-29 23:46:29.007650
++startOfflineSimulation
+
+# 2020-11-29 23:46:34.271983
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-29 23:47:10.487418
++startOnlineSimulation
+
+# 2020-11-29 23:48:21.408151
++loadCarrier 1
+
+# 2020-11-29 23:48:25.614658
++loadCustomer 1
+
+# 2020-11-29 23:48:29.323384
++loadGraph 1\
+
+# 2020-11-29 23:48:34.672313
++loadScenario 1
+
+# 2020-11-29 23:48:38.157999
++setComputationTime 1.0
+
+# 2020-11-29 23:48:41.296030
++setOfflineTime 30
+
+# 2020-11-29 23:48:50.496614
++startOfflineSimulation
+
+# 2020-11-29 23:48:55.953737
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-29 23:49:01.652102
++startOnlineSimulation
+
+# 2020-11-29 23:50:31.172229
++close
+
+# 2020-11-29 23:50:52.468565
++loadCarrier 1
+
+# 2020-11-29 23:50:59.866053
++loadCustomer 1
+
+# 2020-11-29 23:51:03.833033
++loadGraph 1\
+
+# 2020-11-29 23:51:10.629315
++loadScenario 1
+
+# 2020-11-29 23:51:17.468561
++setComputationTime 1.0
+
+# 2020-11-29 23:51:23.919211
++setOfflineTime 30
+
+# 2020-11-29 23:51:31.340669
++startOfflineSimulation
+
+# 2020-11-29 23:51:37.740925
++loadNewSolution /home/yang/capstone/simulator_VRP/simulator/solution.json
+
+# 2020-11-29 23:51:43.892738
++startOnlineSimulation
+
+# 2020-11-29 23:52:39.343548
++saveSolutions /home/yang/Desktop/solution_v1.txt
+
+# 2020-11-30 03:16:38.067393
++loadCarrier 1
+
+# 2020-11-30 03:16:44.142816
++loadCustomer 1
+
+# 2020-11-30 03:16:49.590751
++loadGraph 1\
+
+# 2020-11-30 03:16:57.139320
++loadScenario 1
+
+# 2020-11-30 03:17:03.512125
++setComputationTime 1.0
+
+# 2020-11-30 03:17:08.398475
++setOfflineTime 30
+
+# 2020-11-30 03:17:18.076950
++startOfflineSimulation
+
+# 2020-11-30 03:21:14.010049
++close
+
+# 2020-11-30 03:21:23.053612
++loadCarrier 1
+
+# 2020-11-30 03:21:27.081852
++loadCustomer 1
+
+# 2020-11-30 03:21:32.098886
++loadGraph 1\
+
+# 2020-11-30 03:21:36.582408
++loadScenario 1
+
+# 2020-11-30 03:21:48.942203
++setComputationTime 1.0
+
+# 2020-11-30 03:21:53.055425
++setOfflineTime 30
+
+# 2020-11-30 03:21:59.969968
++startOfflineSimulation
+
+# 2020-11-30 03:23:31.834349
++close
+
+# 2020-11-30 03:23:51.547868
++loadCarrier 1
+
+# 2020-11-30 03:23:57.333983
++loadCustomer 1
+
+# 2020-11-30 03:24:04.471271
++loadGraph 1
+
+# 2020-11-30 03:24:10.479160
++loadScenario 1
+
+# 2020-11-30 03:24:16.178392
++setComputationTime 1.0
+
+# 2020-11-30 03:24:20.702240
++setOfflineTime 30
+
+# 2020-11-30 03:24:27.215339
++startOfflineSimulation
+
+# 2020-11-30 03:29:08.562958
++loadCarrier 1
+
+# 2020-11-30 03:29:12.806136
++loadCustomer 1
+
+# 2020-11-30 03:29:18.354939
++loadGraph 1
+
+# 2020-11-30 03:29:24.518598
++loadScenario 1
+
+# 2020-11-30 03:29:27.711614
++setComputationTime 1.0
+
+# 2020-11-30 03:29:32.460782
++setOfflineTime 30
+
+# 2020-11-30 03:29:52.924767
++startOfflineSimulation
+
+# 2020-11-30 03:42:03.446097
++close
+
+# 2020-11-30 03:42:11.977202
++loadCarrier 1
+
+# 2020-11-30 03:42:15.765152
++loadCustomer 1
+
+# 2020-11-30 03:42:19.173860
++loadGraph 1
+
+# 2020-11-30 03:42:22.654319
++loadScenario 1
+
+# 2020-11-30 03:42:26.394428
++setComputationTime 1.0
+
+# 2020-11-30 03:42:29.083399
++setOfflineTime 30
+
+# 2020-11-30 03:42:32.263042
++startOfflineSimulation
+
+# 2020-11-30 03:44:26.630230
++close
+
+# 2020-11-30 03:48:20.216566
++loadCarrier 1
+
+# 2020-11-30 03:48:24.040999
++loadCustomer 1
+
+# 2020-11-30 03:48:27.204424
++loadGraph 1
+
+# 2020-11-30 03:48:30.269979
++loadScenario 1
+
+# 2020-11-30 03:48:35.157764
++setComputationTime 1.0
+
+# 2020-11-30 03:48:39.573294
++setOfflineTime 30
+
+# 2020-11-30 03:49:35.282997
++startOfflineSimulation
+
+# 2020-11-30 03:51:47.124840
++close

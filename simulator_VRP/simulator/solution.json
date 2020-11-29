@@ -1,0 +1,23 @@
+{
+    "TimeUnitOfSubmission": 100.4,
+    "Routes" : {
+
+        "1": [{
+                "ArrivalTime" : 0 ,
+                "DepartureTime" : 1,
+                "NodeId" : 1,
+		"InstanceVertexID" : 1
+            },{
+                "ArrivalTime" : 20,
+                "DepartureTime" : 55,
+                "NodeId" : 9 ,
+		"InstanceVertexID" : 1,
+                "RequestId" : 4,
+		"RequestInstanceId" : 4
+            },{
+                "ArrivalTime" : 150,
+                "NodeId" : 1,
+		"InstanceVertexID" : 1
+            }]
+    }
+}
