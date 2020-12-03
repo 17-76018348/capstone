@@ -132,7 +132,9 @@ class Solution:
 		try:
 			with open(self.displayFile, 'w') as f:
 				if len(self.data['Solutions']) > 0:
-					self.data['Solutions'][-1]['CurrentDateTime'] = self.data['Solutions'][-1]['CurrentDateTime'].replace('\n', '')
+					# CurrentDataTime가 아예 여기밖에 없음
+					# self.data['Solutions'][-1]['CurrentDateTime'] = self.data['Solutions'][-1]['CurrentDateTime'].replace('\n', '')
+					
 					# txtSol   = json.dumps(self.data['Solutions'][-1])
 					# txtGraph = json.dumps(myGraph) 
 					# txt  = "solution = '" + txtSol   + "';\n";
@@ -330,7 +332,7 @@ class Solution:
 
 		if validSolution:
 			if not self.isServingAcceptedRequest(solution):
-				print("이건뭔문제")
+				# print("이건뭔문제")
 				validSolution = False
 			#안걸림..!
 			# if the solution is loaded from a file, it can not served the accepted request.

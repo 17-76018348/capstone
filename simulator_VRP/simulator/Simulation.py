@@ -295,18 +295,18 @@ class simulationOnlineThread(threading.Thread):
         while not exitFlag:
 
             #통과예상
-            while not self.simuAPI.pauseMessageQueue.empty():
-                message = self.simuAPI.pauseMessageQueue.get()
-                if message[0] == "OK":
-                    self.simuAPI.pauseMessageThread.join()
-                    self.simuAPI.pauseMessageThread = None
-                    endPause = sys.float_info.max
-                    startPause = message[1]
-                    self.pauseSimulation = True
-                    self.upQueue.put(('startOnlinePause',startPause))
-                    self.eventLock.acquire()
-                    self.eventSMQueue.set()
-                    self.eventLock.release()
+            # while not self.simuAPI.pauseMessageQueue.empty():
+            #     message = self.simuAPI.pauseMessageQueue.get()
+            #     if message[0] == "OK":
+            #         self.simuAPI.pauseMessageThread.join()
+            #         self.simuAPI.pauseMessageThread = None
+            #         endPause = sys.float_info.max
+            #         startPause = message[1]
+            #         self.pauseSimulation = True
+            #         self.upQueue.put(('startOnlinePause',startPause))
+            #         self.eventLock.acquire()
+            #         self.eventSMQueue.set()
+            #         self.eventLock.release()
             #통과예상
             while not self.downQueue.empty():
                 message = self.downQueue.get()

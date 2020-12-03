@@ -1512,7 +1512,7 @@ class SMthread(threading.Thread):
 
 
 
-            print("여기가문제냐1")
+            # print("여기가문제냐1")
 
 # 솔버와 통신이 진짜여기 
             # add all the new solutions send by the solver
