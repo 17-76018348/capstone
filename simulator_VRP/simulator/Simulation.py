@@ -11,11 +11,12 @@ import json
 import queue
 from simulatorAPIClasses import simulatorAPI
 import sys
-
+import numpy as np
+import copy
 # Thread to manage an offline simulation
 class simulationOfflineThread(threading.Thread):
 
-    def __init__(self, scenario, downQueue, upQueue, logFileLock, simuAPI, simulationQueue, eventSMQueue, eventLock, myCarrier, mySolutions, myCustomer, myGraph,logFile = None):
+    def __init__(self,vehicle_capacity, scenario, downQueue, upQueue, logFileLock, simuAPI, simulationQueue, eventSMQueue, eventLock, myCarrier, mySolutions, myCustomer, myGraph,logFile = None):
         threading.Thread.__init__(self)
         self.eventSMQueue = eventSMQueue
         self.eventLock = eventLock
@@ -32,7 +33,7 @@ class simulationOfflineThread(threading.Thread):
         self.mySolutions=mySolutions
         self.myCustomer=myCustomer 
         self.myGraph =myGraph   
-
+        self.vehicle_capacity = vehicle_capacity
         
     def run(self):
         timeUnit = -1
@@ -157,7 +158,15 @@ class simulationOfflineThread(threading.Thread):
             # 1) request의 사이즈를 확인
             # 2) 루프물 돌림.
 
-            temp=[]
+            # temp=[]
+            nodeId=1
+            road = [{"ArrivalTime" : 0, "DepartureTime": 0 , "NodeId": nodeId,"InstanceVertexID":nodeId}]
+            road.insert(1,{"ArrivalTime" : 0, "DepartureTime":0 , "NodeId": nodeId, "InstanceVertexID":nodeId})
+            self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {"0": road}})
+            # self.myCarrier.getVehicleType
+            # self.myCarrier.getCapacityOfVehicle(roadId)
+            # vehicle_capacity = {"0":100, "1":100}
+            current_vehicle = 0
             for request in self.scenario.data['Requests']:
                 if request['RevealTime'] == -1:
                     # 3) if문 --> isRoadvalid함수 사용
@@ -170,35 +179,75 @@ class simulationOfflineThread(threading.Thread):
                     # 현재선언함. 초기화 해야함!!
                     # 이유는 depot이 1이란걸 알기때문에, 만약 그렇지않다면 소스코드 좀 수정해야함.
                     
-
                     for roadId in self.myCarrier.data['Vehicles']:
+                        if current_vehicle != int(roadId):
+                            continue
                         # 2대의 차량이 request를 처리하면 초기화하고 다음 request 처리
-                        if len(temp) == 2:
-                            temp = []
-                        # 1 vehicle 1 request 이라서
-                        if roadId in temp:
-                            continue 
+                        # if len(temp) == 2:
+                        #     temp = []
 
+                        # 1 vehicle 1 request 이라서
+                        # if roadId in temp:
+                        #     continue
+                        newcharge = request['Demand']
+                        # vehicleCapacity= self.myCarrier.getCapacityOfVehicle(roadId)
+                        # vehicle_capacity[roadId]
+                        if newcharge >= self.vehicle_capacity[roadId]:
+                            self.vehicle_capacity[roadId] = self.myCarrier.getCapacityOfVehicle(roadId)
+                            print(roadId,"\n")
+                            if int(roadId) == 0:
+                                new_roadId = "1"
+                            elif int(roadId) == 1:
+                                new_roadId = "0" 
+                            print(new_roadId)
+                            road = [{"ArrivalTime" : 0, "DepartureTime": 0 , "NodeId": nodeId,"InstanceVertexID":nodeId}]
+                            road.insert(1,{"ArrivalTime" : 0, "DepartureTime":0 , "NodeId": nodeId, "InstanceVertexID":nodeId})
+                            self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {new_roadId: road}})
+                            current_vehicle = int(new_roadId)
+                            continue
+                        tmp_list = []
+                        tmp_key = list(self.mySolutions.data['Solutions'][-1]['Routes'])[0]
+                        for idx in range(len(self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key])-1):
+                            node1 = int(self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key][idx]["NodeId"])
+                            node2 = int(self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key][idx + 1]["NodeId"])
+                            time1 = self.myCarrier.getTravelTime(node1,request['Node'],self.myCarrier.getVehicleType(roadId),1)
+                            time2 = self.myCarrier.getTravelTime(request['Node'],node2,self.myCarrier.getVehicleType(roadId),1)
+                            tmp_list.append(time1 + time2)
+                        # node_posit은 1, 2 ,3 바로 삽입 가능
+                        node_posit = np.argmin(tmp_list) + 1
+                        
+                        
 
                         
+                        
                         # 0으로 다초기화
-                        nodeId=1
                         # 참고 맨마지막 1은 시작하는 timeslot이고 getTimeSlotOfTimeUnit이 메서드로 호출가능한 부분
-                        arrivaltime= self.myCarrier.getTravelTime(nodeId,request['Node'],self.myCarrier.getVehicleType(roadId),1)
-                        departuretime= request['ServiceDuration'] + arrivaltime
-                        road = [{"ArrivalTime" : 0, "DepartureTime": 0 , "NodeId": nodeId,"InstanceVertexID":nodeId}]
-                        road.insert(1,{"ArrivalTime" : arrivaltime+departuretime, "DepartureTime": 0 , "NodeId": nodeId, "InstanceVertexID":nodeId})
-                        road.insert(1,{"ArrivalTime" : arrivaltime, "DepartureTime": departuretime , "NodeId": request['Node'], "InstanceVertexID":request['Node'], "RequestId": request['RequestId'],"RequestInstanceId":request['RequestId']})
+                        # arrivaltime= self.myCarrier.getTravelTime(nodeId,request['Node'],self.myCarrier.getVehicleType(roadId),1)
+                        # departuretime= request['ServiceDuration'] + arrivaltime
+                        
+                        road = copy.deepcopy(self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key])
+                        road.insert(node_posit,{"ArrivalTime" : 0, "DepartureTime": request["ServiceDuration"] , "NodeId": request['Node'], "InstanceVertexID":request['Node'], "RequestId": request['RequestId'],"RequestInstanceId":request['RequestId']})
+                        
+                        
                         # vehicle마다 arrival time, departuretime 달라짐.
                         # node id는 1.. 
 
                         
                         if self.mySolutions.isRoadValid(roadId,road,self.myGraph,self.myCarrier, self.scenario,self.myCustomer.data["TimeSlots"]):
                             # Constraint 통과시 추가됨.
-                            self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {roadId: road}})
-                            temp.append(roadId)
-                            print(self.mySolutions.data['Solutions'], "\n")
+                            # 기존 1 by 1
+                            print(roadId,"\n")
+                            # self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {roadId: road}})
+                            self.mySolutions.data['Solutions'][-1]["Routes"][roadId] = road
+                            self.vehicle_capacity[roadId] -= newcharge
+                            # self.myCarrier.getCapacityOfVehicle(roadId) -= newcharge
+                            # temp.append(roadId)
+                            # print(self.mySolutions.data['Solutions'], "\n")
+                        
                             break
+                        else:
+                            print("invalid")
+                        
 
 
 
@@ -207,12 +256,26 @@ class simulationOfflineThread(threading.Thread):
 
                         # 3-2 vertex id
                         # 3-3 departure time, arrival time
+            
+            self.mySolutions.data['Solutions'][-1]["Routes"][roadId]
+            for solution in self.mySolutions.data['Solutions']:
+                tmp_key = list(solution['Routes'])[0]
+                
+                for idx, node in enumerate(solution["Routes"][tmp_key]):
+                    if node["NodeId"] == 1:
+                        past_node = node
+                        continue
+                    else:
+                        node["ArrivalTime"] += past_node["DepartureTime"] + self.myCarrier.getTravelTime(past_node["NodeId"],node["NodeId"],"van",1)
+                        # node["DepartureTime"]에 serviceduration미리 넣어놓음
+                        # 안그러면 찾는게 영 힘들어짐
+                        node["DepartureTime"] = node["ArrivalTime"] + node["DepartureTime"]
 
 
                     
 
             
-            
+                        past_node = node                     
             # 4) first fit이라서 처음 리턴되는거 그대로 솔루션에 때려박기
             # 5) 우선순위는 완성되지 않은 rotue(road) > 기존에 완성된 road(route)
 
@@ -242,7 +305,7 @@ class simulationOfflineThread(threading.Thread):
                             
 class simulationOnlineThread(threading.Thread):
     
-    def __init__(self, scenario, downQueue, upQueue, logFileLock, simuAPI, simulationQueue, eventSMQueue, eventLock, myCarrier, mySolutions, myCustomer, myGraph,logFile = None):
+    def __init__(self,vehicle_capacity ,scenario, downQueue, upQueue, logFileLock, simuAPI, simulationQueue, eventSMQueue, eventLock, myCarrier, mySolutions, myCustomer, myGraph,logFile = None):
         threading.Thread.__init__(self)
         self.eventSMQueue = eventSMQueue
         self.eventLock = eventLock
@@ -262,6 +325,7 @@ class simulationOnlineThread(threading.Thread):
         self.myGraph =myGraph
         self.downQueue = downQueue
         self.upQueue = upQueue
+        self.vehicle_capacity = vehicle_capacity
     def run(self):
         timeUnit = 0
         
@@ -375,7 +439,8 @@ class simulationOnlineThread(threading.Thread):
 
                 elif message.startswith("logFile "):
                     self.logFile = message.replace('logFile ', '', 1)
-            
+            print("online if전\n")
+            nodeId = 1
             # test the beginning of a new time unit
             if (time.time() - startTime - totalPauseTime) >= timeUnit * ComputationTime - self.marginTimeRequestSending * numberRequestToSend :
                 
@@ -388,33 +453,198 @@ class simulationOnlineThread(threading.Thread):
                     self.eventLock.acquire()
                     self.eventSMQueue.set()
                     self.eventLock.release()
-                    
-                    newcharge=0
+                    # offline에선 초기화 필요했지만 Online에서 불필요
+                    # current_vehicle = 0
+                    # for request in self.scenario.data['Requests']:
+                    #         # 3) if문 --> isRoadvalid함수 사용
+                    #         # 3-1) 초기화 -->특정 veh를 넣어준다
+                    #         # roadId는 루프돌며순회하는 인덱스임
+                    #         # 개수는?-->veh.의 개수이니까. carrier 파일에서 가져와야함.
 
-                    for request in self.scenario.data['Requests']:
-                        if request['RevealTime'] > timeUnit+1:
-                            pass
-                        if request['RevealTime'] == timeUnit + 1:
-                            numberRequestToSend += 0.5
-                        if request['RevealTime'] == timeUnit: 
+                    #         # road는 딕셔너리의 배열. index는 position!
+                    #         # 밑에 변수들 다 초기화해줘야함.
+                    #         # 현재선언함. 초기화 해야함!!
+                    #         # 이유는 depot이 1이란걸 알기때문에, 만약 그렇지않다면 소스코드 좀 수정해야함.
+                            
+                    #     for roadId in self.myCarrier.data['Vehicles']:
+                    #         if current_vehicle != int(roadId):
+                    #             continue
+                    #         # 2대의 차량이 request를 처리하면 초기화하고 다음 request 처리
+                    #         # if len(temp) == 2:
+                    #         #     temp = []
+
+                    #         # 1 vehicle 1 request 이라서
+                    #         # if roadId in temp:
+                    #         #     continue
+                    #         newcharge = request['Demand']
+                    #         # vehicleCapacity= self.myCarrier.getCapacityOfVehicle(roadId)
+                    #         # vehicle_capacity[roadId]
+                    #         if newcharge >= self.vehicle_capacity[roadId]:
+                    #             self.vehicle_capacity[roadId] = self.myCarrier.getCapacityOfVehicle(roadId)
+                    #             print(roadId,"\n")
+                    #             if int(roadId) == 0:
+                    #                 new_roadId = "1"
+                    #             elif int(roadId) == 1:
+                    #                 new_roadId = "0" 
+                    #             print(new_roadId)
+                    #             road = [{"ArrivalTime" : 0, "DepartureTime": 0 , "NodeId": nodeId,"InstanceVertexID":nodeId}]
+                    #             road.insert(1,{"ArrivalTime" : 0, "DepartureTime":0 , "NodeId": nodeId, "InstanceVertexID":nodeId})
+                    #             self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {new_roadId: road}})
+                    #             current_vehicle = int(new_roadId)
+                    #             continue
+                    #         tmp_list = []
+                    #         tmp_key = list(self.mySolutions.data['Solutions'][-1]['Routes'])[0]
+                    #         for idx in range(len(self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key])-1):
+                                
+                    #             node1 = int(self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key][idx]["NodeId"])
+                    #             node2 = int(self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key][idx + 1]["NodeId"])
+                    #             time1 = self.myCarrier.getTravelTime(node1,request['Node'],self.myCarrier.getVehicleType(roadId),1)
+                    #             time2 = self.myCarrier.getTravelTime(request['Node'],node2,self.myCarrier.getVehicleType(roadId),1)
+                    #             if request["RevealTime"] <= self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key][idx + 1]["ArrivalTime"]: 
+                    #                 tmp_list.append(time1 + time2)
+                    #             else:
+                    #                 tmp_list.append(100000)
+
+                    #         # node_posit은 1, 2 ,3 바로 삽입 가능
+                    #         node_posit = np.argmin(tmp_list) + 1
+                            
+                            
+
+                            
+                            
+                    #         # 0으로 다초기화
+                    #         # 참고 맨마지막 1은 시작하는 timeslot이고 getTimeSlotOfTimeUnit이 메서드로 호출가능한 부분
+                    #         # arrivaltime= self.myCarrier.getTravelTime(nodeId,request['Node'],self.myCarrier.getVehicleType(roadId),1)
+                    #         # departuretime= request['ServiceDuration'] + arrivaltime
+                            
+                    #         road = copy.deepcopy(self.mySolutions.data['Solutions'][-1]['Routes'][tmp_key])
+                    #         road.insert(node_posit,{"ArrivalTime" : 0, "DepartureTime": 0 , "NodeId": request['Node'], "InstanceVertexID":request['Node'], "RequestId": request['RequestId'],"RequestInstanceId":request['RequestId']})
+                            
+                            
+                    #         # vehicle마다 arrival time, departuretime 달라짐.
+                    #         # node id는 1.. 
+
+                            
+                    #         if self.mySolutions.isRoadValid(roadId,road,self.myGraph,self.myCarrier, self.scenario,self.myCustomer.data["TimeSlots"]):
+                    #             # Constraint 통과시 추가됨.
+                    #             # 기존 1 by 1
+                    #             print(roadId,"\n")
+                    #             # self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {roadId: road}})
+                    #             self.mySolutions.data['Solutions'][-1]["Routes"][roadId] = road
+                    #             self.vehicle_capacity[roadId] -= newcharge
+                    #             # self.myCarrier.getCapacityOfVehicle(roadId) -= newcharge
+                    #             # temp.append(roadId)
+                    #             # print(self.mySolutions.data['Solutions'], "\n")
+                            
+                    #             break
+                    #         else:
+                    #             print("invalid")
+                    # newcharge=0
+                    # road = [{"ArrivalTime" : 0, "DepartureTime": 0 , "NodeId": 1,"InstanceVertexID":1, "RequestID":0}]
+                    # self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {0: road}})
+                    # self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {1: road}})
+
+
+                    
+
+                    
+
+                    
                             # new request
                             # first fit 알고리즘
                             # request fetching 
 			                # The load of the road must not exceed vehicle's capacity
                             #체크포인트
                         
-                            print("firstfit제발돌아가라")
-                            newcharge = request['Demand']
-                            for roadid in self.myCarrier.data['Vehicles']:
+                            
+                            # newcharge = request['Demand']
+                            # for roadid in self.myCarrier.data['Vehicles']:
 
-                                vehicleCapacity= self.myCarrier.getCapacityOfVehicle(roadid)
-                                if newcharge <= vehicleCapacity:
-                                    vehicleCapacity-=newcharge
+                            #     vehicleCapacity= self.myCarrier.getCapacityOfVehicle(roadid)
+                            #     if newcharge <= vehicleCapacity:
+                            #         vehicleCapacity-=newcharge
 
-                                    #valid한지 check
-                                    self.mySolutions.insertRequest(request['RequestId'],roadid,0, self.myGraph,self.myCarrier,self.myCustomer,self.scenario)
+                            #         #valid한지 check
+                            #         self.mySolutions.insertRequest(request['RequestId'],roadid,0, self.myGraph,self.myCarrier,self.myCustomer,self.scenario)
 
-                                    break
+                            #         break
+                            #     # 2대의 차량이 request를 처리하면 초기화하고 다음 request 처리
+                            #     if len(temp) == 2:
+                            #         temp = []
+                            #     # 1 vehicle 1 request 이라서
+                            #     if roadId in temp:
+                            #         continue 
+                            
+
+
+                            # request ID가 발생한 node ID
+
+
+                            
+                            #기존에 짜진 route에 requst를 할당하면 총 Travel time은?
+                            # for roadId in self.myCarrier.data['Vehicles']:
+
+                            # # count=0
+                            # # for solutionId, solution_data in enumerate(self.mySolutions.data['Solutions']):
+                            # #     for roadId in self.myCarrier.data['Vechiles']:
+                            # #         if request['RequestId'] == self.mySolutions.data['Solutions'][solutionId]['Routes'][roadId]['RequestId']:
+                            # #             count+=1
+
+                            # # print("몇번카운트됬나봅세",count)
+
+                            # # if count ==0:
+                            # #     #request 0인경우
+
+                            # # else if count ==1:
+
+                            # #     #request 1인경우
+
+                            # # else if count ==2:
+
+
+                            
+                            # # 소멸하는부분에다가 이미 처리한 road는 Count에다가 제해줘야함
+
+                            # # 각 차량마다 다음의 고민을 해야함
+                            # # 기존에 짜진 route에 request를 배정할지 vs. 새로운 route에 request를 배정할지
+                            # # if 전자인 경우, 
+                            # # 차량에 할당된 reqeust의 개수는 0개 
+                            # # if 후자인 경우,
+                            # # 차량에 할당된 reuqest의 개수는 1개
+                            # # 기존vs. new의 비교 기준은??
+
+
+                            # # 그 다음count를 이용해서 3개의 조건문
+
+
+
+                            #     for roadId in self.myCarrier.data['Vehicles']:
+                            #         # 2대의 차량이 request를 처리하면 초기화하고 다음 request 처리
+                            #         if len(temp) == 2:
+                            #             temp = []
+                            #         # 1 vehicle 1 request 이라서
+                            #         if roadId in temp:
+                            #             continue 
+                            #         # 0으로 다초기화
+
+
+                            #         nodeId=1
+                            #         # 참고 맨마지막 1은 시작하는 timeslot이고 getTimeSlotOfTimeUnit이 메서드로 호출가능한 부분
+                            #         arrivaltime= self.myCarrier.getTravelTime(nodeId,request['Node'],self.myCarrier.getVehicleType(roadId),1)
+                            #         departuretime= request['ServiceDuration'] + arrivaltime
+                            #         road = [{"ArrivalTime" : 0, "DepartureTime": 0 , "NodeId": nodeId,"InstanceVertexID":nodeId}]
+                            #         road.insert(1,{"ArrivalTime" : arrivaltime+departuretime, "DepartureTime": 0 , "NodeId": nodeId, "InstanceVertexID":nodeId})
+                            #         road.insert(1,{"ArrivalTime" : arrivaltime, "DepartureTime": departuretime , "NodeId": request['Node'], "InstanceVertexID":request['Node'], "RequestId": request['RequestId'],"RequestInstanceId":request['RequestId']})
+                            #         # vehicle마다 arrival time, departuretime 달라짐.
+                            #         # node id는 1.. 
+                                    
+                                    
+                            #         if self.mySolutions.isRoadValid(roadId,road,self.myGraph,self.myCarrier, self.scenario,self.myCustomer.data["TimeSlots"]):
+                            #             # Constraint 통과시 추가됨.
+                            #             self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {roadId: road}})
+                            #             temp.append(roadId)
+                            #             print(self.mySolutions.data['Solutions'], "\n")
+                            #             break
                             # msg = json.dumps(request)
                             # msg = '{"NewRequests" : ' + msg + "}"
                             # self.simuAPI.sendNewRequestsJsonToSolver(msg)
@@ -426,13 +656,11 @@ class simulationOnlineThread(threading.Thread):
                             #     lf.close()
                             #     self.logFileLock.release()
 
-                    timeUnit += 1
-                    if timeUnit >= self.horizonSize:  
-                        self.upQueue.put(('endOfOnlineSimulation',  (time.time() - startTime - totalPauseTime)/ComputationTime))
-                        self.eventLock.acquire()
-                        self.eventSMQueue.set()
-                        self.eventLock.release()
-                    
+                timeUnit += 1
+                if timeUnit >= self.horizonSize:  
+                    self.upQueue.put(('endOfOnlineSimulation',  (time.time() - startTime - totalPauseTime)/ComputationTime))
+                    self.eventLock.acquire()
+                    self.eventSMQueue.set()
                     
 
                 #self.simuAPI.testConnection()

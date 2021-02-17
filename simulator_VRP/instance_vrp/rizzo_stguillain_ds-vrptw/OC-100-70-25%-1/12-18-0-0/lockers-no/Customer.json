@@ -1,6 +1,6 @@
 {
     "FileType": "Customers",
-    "HorizonSize": 480,
+    "HorizonSize": 2,
     "PotentialRequests": [
         {
             "ArrivalProbability": [

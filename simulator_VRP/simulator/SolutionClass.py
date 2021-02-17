@@ -394,16 +394,18 @@ class Solution:
 				print('capacity of vehicle {} is exceeded, capacity : {}  charge {}'.format(roadId, vehicleCapacity, vehicleCharge))
 				return False
 
-			if previousNode is None:
-				pass
-			else:
-				if not self.isTravelTimeValid(previousNode, node, carrierObj, vehicleType, timeslots):
-					print('travel time not respected')
-					return False
-				#이부분 주석다시 풀어야함 체크포인트
-				pass
-				# if not self.isTimeWindowValid(node, myScenario, carrierObj):
-				# 	return False
+
+			# 체크포인트travel time이 안중요
+			# if previousNode is None:
+			# 	pass
+			# else:
+			# 	if not self.isTravelTimeValid(previousNode, node, carrierObj, vehicleType, timeslots):
+			# 		print('travel time not respected')
+			# 		return False
+			# 	#이부분 주석다시 풀어야함 체크포인트
+			# 	pass
+			# 	# if not self.isTimeWindowValid(node, myScenario, carrierObj):
+			# 	# 	return False
 			previousNode = node
 		return True
 

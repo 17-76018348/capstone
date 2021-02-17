@@ -25584,3 +25584,792 @@
 
 # 2020-12-04 03:23:56.788217
 +close
+
+# 2020-12-04 16:22:50.086133
++loadCarrier 1
+
+# 2020-12-04 16:22:53.085260
++loadCUstomer 1
+
+# 2020-12-04 16:23:09.082253
++loadCustomer 1
+
+# 2020-12-04 16:23:12.615164
++loadGraph 1
+
+# 2020-12-04 16:23:19.629645
++loadScenario 1
+
+# 2020-12-04 16:23:25.128959
++setComputationTime 1.0
+
+# 2020-12-04 16:23:33.186027
++setOfflineTime 30
+
+# 2020-12-04 16:23:40.873044
++startOfflineSimulation
+
+# 2020-12-04 16:24:03.564252
++saveSolutions /home/yang/Desktop/solution_v4_tmp.txt
+
+# 2020-12-04 16:24:31.271792
++ls
+
+# 2020-12-04 16:24:51.811091
++saveUserSolution /home/yang/Desktop/userSolution_v1.txt
+
+# 2020-12-04 16:24:53.778563
++ls
+
+# 2020-12-04 16:24:56.380887
++f
+
+# 2020-12-04 16:25:11.728246
++close
+
+# 2020-12-04 17:46:42.114614
++loadCarrier 1
+
+# 2020-12-04 17:46:46.063022
++loadCustomer 1
+
+# 2020-12-04 17:46:48.536747
++loadGraph 1
+
+# 2020-12-04 17:46:51.497451
++loadScenario 1
+
+# 2020-12-04 17:46:55.585767
++setComputationTime 1.0
+
+# 2020-12-04 17:47:00.058359
++setOfflineTime 30
+
+# 2020-12-04 17:47:02.918902
++startOfflineSimulation
+
+# 2020-12-04 17:47:07.786279
++startOnlineSimulation
+
+# 2020-12-04 17:48:58.498011
++close
+
+# 2020-12-10 23:14:04.217630
++loadCarrier 1
+
+# 2020-12-10 23:14:07.310890
++loadCustomer 1
+
+# 2020-12-10 23:14:11.518265
++loadGraph 1
+
+# 2020-12-10 23:14:16.543394
++loadScenario 1
+
+# 2020-12-10 23:14:22.104223
++setComputationTime 1.0
+
+# 2020-12-10 23:14:29.979441
++setOfflineTime 30
+
+# 2020-12-10 23:14:35.104064
++startOfflineSimulation
+
+# 2020-12-10 23:15:42.799759
++close
+
+# 2020-12-10 23:15:59.254389
++loadCarrier 1
+
+# 2020-12-10 23:16:01.427457
++loadCustomer 1
+
+# 2020-12-10 23:16:03.906771
++loadGraph 1
+
+# 2020-12-10 23:16:06.883189
++loadScenario 1
+
+# 2020-12-10 23:16:11.988597
++setComputationTime 1.0
+
+# 2020-12-10 23:16:17.823602
++setOfflineTime 30
+
+# 2020-12-10 23:16:21.379498
++startOfflineSimulation
+
+# 2020-12-10 23:18:32.812067
++close
+
+# 2020-12-10 23:18:41.643932
++loadCarrier 1
+
+# 2020-12-10 23:18:46.671957
++loadCustomer 1
+
+# 2020-12-10 23:18:54.796973
++loadGraph 1
+
+# 2020-12-10 23:18:58.640729
++loadScenario 1
+
+# 2020-12-10 23:19:05.325717
++setComputationTime 30
+
+# 2020-12-10 23:19:13.626536
++setOfflineTime 30
+
+# 2020-12-10 23:19:22.199375
++setComputationTime 1.0
+
+# 2020-12-10 23:19:28.148372
++startOfflineSimulation
+
+# 2020-12-10 23:22:22.479629
++loadCarrier 1
+
+# 2020-12-10 23:22:25.449001
++loadCustomer 1
+
+# 2020-12-10 23:22:28.191910
++loadGraph 1
+
+# 2020-12-10 23:22:34.645971
++loadScenario 1
+
+# 2020-12-10 23:22:38.861872
++setComputationTime 1.0
+
+# 2020-12-10 23:22:43.698994
++setOfflineTime 30
+
+# 2020-12-10 23:22:48.972903
++startOfflineSimulation
+
+# 2020-12-10 23:36:59.498959
++loadCarrier 1
+
+# 2020-12-10 23:37:03.561823
++loadCustomer 1
+
+# 2020-12-10 23:37:10.926956
++loadGraph 1
+
+# 2020-12-10 23:37:18.191531
++loadScenario
+
+# 2020-12-10 23:37:22.623412
++loadScenario 1
+
+# 2020-12-10 23:37:36.221313
++setComputationTime 1.0
+
+# 2020-12-10 23:37:40.964245
++setOfflineTime 30
+
+# 2020-12-10 23:37:54.181495
++startOfflineSimulation
+
+# 2020-12-10 23:47:59.902490
++loadCarrier 1
+
+# 2020-12-10 23:48:05.254851
++loadCustomer 1
+
+# 2020-12-10 23:48:09.812469
++loadGraph 1
+
+# 2020-12-10 23:48:13.510722
++loadScenario 1
+
+# 2020-12-10 23:48:16.963768
++setComputationTime 1.0
+
+# 2020-12-10 23:48:20.679976
++setOfflineTime 30
+
+# 2020-12-10 23:48:22.278953
++startOfflineSimulation
+
+# 2020-12-10 23:56:18.769921
++loadCarrier 1
+
+# 2020-12-10 23:56:20.685262
++loadCustomer 1
+
+# 2020-12-10 23:56:22.834841
++loadGraph 1
+
+# 2020-12-10 23:56:25.154146
++loadScenario 1
+
+# 2020-12-10 23:56:27.622388
++setComputationTime 1.0
+
+# 2020-12-10 23:56:31.023879
++setOfflineTime 30
+
+# 2020-12-10 23:56:32.762801
++startOfflineSimulation
+
+# 2020-12-11 00:10:30.071668
++loadCarrier 1
+
+# 2020-12-11 00:10:33.303474
++loadCustomer 1
+
+# 2020-12-11 00:10:36.198973
++loadGraph 1
+
+# 2020-12-11 00:10:41.992991
++loadScenario 1
+
+# 2020-12-11 00:10:46.879369
++setComputationTime 1.0
+
+# 2020-12-11 00:10:53.091211
++setOfflineTime 30
+
+# 2020-12-11 00:10:55.901195
++startOfflineSimulation
+
+# 2020-12-11 00:11:38.213812
++saveSolutions /home/yang/Desktop/solution_1211.json
+
+# 2020-12-11 00:19:07.517686
++loadCarrier 1
+
+# 2020-12-11 00:19:09.827348
++loadCustomer 1
+
+# 2020-12-11 00:19:12.410925
++loadGraph 1
+
+# 2020-12-11 00:19:15.417504
++loadScenario 1
+
+# 2020-12-11 00:19:21.744329
++setComputationTime 1.0
+
+# 2020-12-11 00:19:26.264294
++setOfflineTime 30
+
+# 2020-12-11 00:19:35.460607
++startOfflineSimulation
+
+# 2020-12-11 00:20:01.162885
++close
+
+# 2020-12-11 00:20:11.763632
++loadCarrier 1
+
+# 2020-12-11 00:20:13.949546
++loadCustomer 1
+
+# 2020-12-11 00:20:21.119428
++loadGraph 1
+
+# 2020-12-11 00:20:24.343972
++loadScenario 1
+
+# 2020-12-11 00:20:28.551782
++setComputationTime 1.0
+
+# 2020-12-11 00:20:32.907106
++setOfflineTime 30
+
+# 2020-12-11 00:20:35.458453
++startOfflineSimulation
+
+# 2020-12-11 00:21:42.334057
++saveSolutions
+
+# 2020-12-11 00:22:01.189428
++saveSolutions /home/yang/Desktop/solution_1211_2.json
+
+# 2020-12-11 00:29:23.807270
++close
+
+# 2020-12-11 00:29:32.054217
++loadCarrier 1
+
+# 2020-12-11 00:29:33.806988
++loadCustomer 1
+
+# 2020-12-11 00:29:35.925680
++loadGraph 1
+
+# 2020-12-11 00:29:38.168010
++loadScenario 1
+
+# 2020-12-11 00:29:41.759053
++setComputationTime 1.0
+
+# 2020-12-11 00:29:45.684913
++setOfflineTime 30
+
+# 2020-12-11 00:29:47.849853
++startOfflineSimulation
+
+# 2020-12-11 00:30:46.881293
++saveSolutions /home/yang/Desktop/solution_1211_3.json
+
+# 2020-12-11 00:34:22.257241
++close
+
+# 2020-12-11 00:34:26.554226
++loadCarrier 1
+
+# 2020-12-11 00:34:28.329439
++loadCustomer 1
+
+# 2020-12-11 00:34:30.302198
++loadGraph 1
+
+# 2020-12-11 00:34:32.533317
++loadScenario 1
+
+# 2020-12-11 00:34:36.276066
++setComputationTime 1.0
+
+# 2020-12-11 00:34:39.446001
++setOfflineTime 30
+
+# 2020-12-11 00:34:41.835237
++startOfflineSimulation
+
+# 2020-12-11 00:35:10.507669
++saveSolutions /home/yang/Desktop/solution_1211_4.json
+
+# 2020-12-11 00:35:53.048783
++close
+
+# 2020-12-11 00:36:03.031660
++loadCarrier 1
+
+# 2020-12-11 00:36:06.655484
++loadCustomer 1
+
+# 2020-12-11 00:36:08.582399
++loadGraph 1
+
+# 2020-12-11 00:36:10.848109
++loadScenario 1
+
+# 2020-12-11 00:36:13.386239
++setComputationTime 1.0
+
+# 2020-12-11 00:36:16.351108
++setOfflineTime 30
+
+# 2020-12-11 00:36:19.147616
++startOfflineSimulation
+
+# 2020-12-11 00:36:29.694080
++saveSolutions /home/yang/Desktop/solution_1211_5.json
+
+# 2020-12-11 00:44:18.099391
++close
+
+# 2020-12-11 00:44:24.186554
++loadCarrier 1
+
+# 2020-12-11 00:44:26.578573
++loadCustomer 1
+
+# 2020-12-11 00:44:29.614281
++loadGraph 1
+
+# 2020-12-11 00:44:34.753648
++loadScenario 1
+
+# 2020-12-11 00:44:43.821721
++setComputationTime 1.0
+
+# 2020-12-11 00:44:49.607909
++setOfflineTime 30
+
+# 2020-12-11 00:45:00.606978
++startOfflineSimulation
+
+# 2020-12-11 00:45:12.888798
++saveSolutions /home/yang/Desktop/solution_1211_6.json
+
+# 2020-12-11 01:27:11.427826
++close
+
+# 2020-12-11 02:21:39.882653
++loadCarrier 1
+
+# 2020-12-11 02:21:43.109155
++loadCustomer 1
+
+# 2020-12-11 02:21:46.207350
++loadGraph 1
+
+# 2020-12-11 02:21:50.722786
++loadScenario 1
+
+# 2020-12-11 02:21:55.615371
++setComputationTime 1.0
+
+# 2020-12-11 02:21:59.368950
++setOfflineTime 30
+
+# 2020-12-11 02:22:01.413236
++startOfflineSimulation
+
+# 2020-12-11 02:22:23.559707
++saveSolutions /home/yang/Desktop/solution_1211_7.json
+
+# 2020-12-11 02:24:50.439431
++close
+
+# 2020-12-11 02:27:22.224301
++loadCarrier 1
+
+# 2020-12-11 02:27:25.552377
++loadCustomer 1
+
+# 2020-12-11 02:27:29.044001
++loadGraph 1
+
+# 2020-12-11 02:27:40.913306
++loadScenario 1
+
+# 2020-12-11 02:27:51.006911
++setComputationTime 1.0
+
+# 2020-12-11 02:27:57.789616
++setOfflineTime 30
+
+# 2020-12-11 02:29:41.256193
++startOfflineSimulation
+
+# 2020-12-11 02:30:04.984978
++saveSolutions /home/yang/Desktop/solution_1211_8.json
+
+# 2020-12-11 02:35:40.425626
++close
+
+# 2020-12-11 02:35:50.451349
++loadCarrier 1
+
+# 2020-12-11 02:35:52.953923
++loadCustomer 1
+
+# 2020-12-11 02:35:56.548426
++loadGraph 1
+
+# 2020-12-11 02:36:00.919805
++loadScenario 1
+
+# 2020-12-11 02:36:04.958453
++setComputationTime 1.0
+
+# 2020-12-11 02:36:10.042442
++setOfflineTime 30
+
+# 2020-12-11 02:36:21.117213
++startOfflineSimulation
+
+# 2020-12-11 02:36:43.271396
++saveSolutions /home/yang/Desktop/solution_1211_9.json
+
+# 2020-12-11 02:42:54.966337
++clsoe
+
+# 2020-12-11 02:42:56.616976
++close
+
+# 2020-12-11 02:43:01.556753
++loadCarrier 1
+
+# 2020-12-11 02:43:03.342895
++loadCustomer 1
+
+# 2020-12-11 02:43:05.322568
++loadGraph 1
+
+# 2020-12-11 02:43:07.703210
++loadScenario 1
+
+# 2020-12-11 02:43:10.807015
++setComputationTime 1.0
+
+# 2020-12-11 02:43:14.147569
++setOfflineTime 30
+
+# 2020-12-11 02:43:20.217031
++startOfflineSimulation
+
+# 2020-12-11 02:44:33.091004
++loadCarrier 1
+
+# 2020-12-11 02:44:35.058467
++loadCustomer 1
+
+# 2020-12-11 02:44:37.990110
++loadGraph 1
+
+# 2020-12-11 02:44:40.890700
++loadScenario 1
+
+# 2020-12-11 02:44:45.654074
++setComputationTime 1.0
+
+# 2020-12-11 02:44:49.541481
++setOfflineTime 30
+
+# 2020-12-11 02:44:51.635055
++startOfflineSimulation
+
+# 2020-12-11 02:46:03.734190
++close
+
+# 2020-12-11 02:46:08.241620
++loadCarrier 1
+
+# 2020-12-11 02:46:11.288917
++loadCustomer 1
+
+# 2020-12-11 02:46:14.013439
++loadGraph 1
+
+# 2020-12-11 02:46:16.566014
++loadScenario 1
+
+# 2020-12-11 02:46:19.956559
++setComputationTime 1.0
+
+# 2020-12-11 02:46:23.199063
++setOfflineTime 30
+
+# 2020-12-11 02:46:24.761312
++startOfflineSimulation
+
+# 2020-12-11 02:50:35.528642
++close
+
+# 2020-12-11 02:50:39.501930
++loadCarrier 1
+
+# 2020-12-11 02:50:41.101393
++loadCustomer 1
+
+# 2020-12-11 02:50:42.947795
++loadGraph 1
+
+# 2020-12-11 02:50:45.268582
++loadScenario 1
+
+# 2020-12-11 02:50:47.589562
++setComputationTime 1.0
+
+# 2020-12-11 02:50:50.069291
++setOfflineTime 30
+
+# 2020-12-11 02:50:52.136741
++startOfflineSimulation
+
+# 2020-12-11 02:51:09.181168
++saveSolutions /home/yang/Desktop/solution_1211_10.json
+
+# 2020-12-11 02:53:38.717137
++cose
+
+# 2020-12-11 02:53:39.904840
++close
+
+# 2020-12-11 02:53:45.051582
++loadCarrier 1
+
+# 2020-12-11 02:53:48.122228
++loadCustomer 1
+
+# 2020-12-11 02:53:50.969305
++loadGraph 1
+
+# 2020-12-11 02:53:53.833673
++loadScenario 1
+
+# 2020-12-11 02:53:58.013570
++setComputationTime 1.0
+
+# 2020-12-11 02:54:01.129083
++setOfflineTime 30
+
+# 2020-12-11 02:54:04.603654
++startOfflineSimulation
+
+# 2020-12-11 02:57:27.779976
++loadCarrier 1
+
+# 2020-12-11 02:57:29.444246
++loadCustomer 1
+
+# 2020-12-11 02:57:31.401304
++loadGraph 1
+
+# 2020-12-11 02:57:33.583833
++loadScenario 1
+
+# 2020-12-11 02:57:36.022759
++setComputationTime 1.0
+
+# 2020-12-11 02:57:40.080323
++setOfflineTime 30
+
+# 2020-12-11 02:57:42.730343
++startOfflineSimulation
+
+# 2020-12-11 02:57:59.960830
++saveSolutions /home/yang/Desktop/solution_1211_11.json
+
+# 2020-12-11 02:58:29.006697
++close
+
+# 2020-12-11 02:58:33.137527
++loadCarrier 1
+
+# 2020-12-11 02:58:38.212867
++loadCustomer 1
+
+# 2020-12-11 02:58:40.195550
++loadGraph 1
+
+# 2020-12-11 02:58:42.768038
++loadScenario 1
+
+# 2020-12-11 02:58:45.638493
++setComputationTime 1.0
+
+# 2020-12-11 02:58:48.278750
++setOfflineTime 30
+
+# 2020-12-11 02:58:50.616733
++startOfflineSimulation
+
+# 2020-12-11 02:59:17.576378
++saveSolutions /home/yang/Desktop/solution_1211_12.json
+
+# 2020-12-11 03:55:54.077884
++clsoe
+
+# 2020-12-11 03:55:55.221359
++close
+
+# 2020-12-11 03:56:12.727210
++loadCarrier
+
+# 2020-12-11 03:56:16.057508
++loadCustomer 1
+
+# 2020-12-11 03:56:18.703292
++loadGraph 1
+
+# 2020-12-11 03:56:22.450311
++loadScenario 1
+
+# 2020-12-11 03:56:26.838601
++setComputationTime 1.0
+
+# 2020-12-11 03:56:30.447801
++setOfflineTime 30
+
+# 2020-12-11 03:56:34.730521
++startOfflineSimulation
+
+# 2020-12-11 03:57:03.796424
++close
+
+# 2020-12-11 03:57:11.843999
++loadCarrier 1
+
+# 2020-12-11 03:57:13.957839
++loadCustomer 1
+
+# 2020-12-11 03:57:17.521969
++loadGraph 1
+
+# 2020-12-11 03:57:28.949735
++loadScenario 1
+
+# 2020-12-11 03:57:37.703910
++setComputationTime 1.0
+
+# 2020-12-11 03:57:42.409359
++setOfflineTime 30
+
+# 2020-12-11 03:57:51.256980
++startOfflineSimulation
+
+# 2020-12-11 03:58:08.361149
++saveSolutions /home/yang/Desktop/solution_1211_13.json
+
+# 2020-12-11 03:59:04.684622
++close
+
+# 2020-12-11 03:59:09.565884
++loadCarrier 1
+
+# 2020-12-11 03:59:12.188600
++loadCustomer 1
+
+# 2020-12-11 03:59:14.822775
++loadGraph 1
+
+# 2020-12-11 03:59:17.262570
++loadScenario 1
+
+# 2020-12-11 03:59:21.015274
++setComputationTime 1.0
+
+# 2020-12-11 03:59:24.392706
++setOfflineTime 30
+
+# 2020-12-11 03:59:28.842535
++startOfflineSimulation
+
+# 2020-12-11 03:59:32.030238
++saveSolutions /home/yang/Desktop/solution_1211_13.json
+
+# 2020-12-11 04:02:16.850660
++close
+
+# 2020-12-11 04:02:20.298732
++loadCarrier 1
+
+# 2020-12-11 04:02:21.808810
++loadCustomer 1
+
+# 2020-12-11 04:02:28.143524
++loadGraph 1
+
+# 2020-12-11 04:02:30.490024
++loadScenario 1
+
+# 2020-12-11 04:02:33.304467
++setComputationTime 1.0
+
+# 2020-12-11 04:02:36.439299
++setOfflineTime 30
+
+# 2020-12-11 04:02:37.847364
++startOfflineSimulation
+
+# 2020-12-11 04:02:46.653708
++saveSolutions /home/yang/Desktop/solution_1211_14.json
+
+# 2020-12-11 04:48:08.722384
++close
+
+# 2020-12-11 08:24:49.774414
++loadUserSolutions /home/yang.json
+
+# 2020-12-11 08:26:54.077252
++loadCarrier 1
+
+# 2020-12-11 08:35:23.946301
++close

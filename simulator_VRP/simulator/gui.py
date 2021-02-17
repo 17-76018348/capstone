@@ -8,7 +8,7 @@ import UserInputManager
 import queue
 import threading
 import time
-
+import json
 import carrierTabClass
 import customerTabClass
 import graphTabClass
@@ -33,7 +33,8 @@ class mainWindow:
 		self.root.protocol('WM_DELETE_WINDOW', self.closeFunction)
 		self.root.title('vrpSimu')
 		self.root.minsize(1200,800)
-
+		
+		self.mySolutions = None
 
 		
 
@@ -157,10 +158,15 @@ class mainWindow:
 	def on_loadSolution(self):
 		''' open a file dialog to get the name of the solution file to load
 			and send a command to the simulator '''
-		filename = tk.filedialog.askopenfilename(initialdir = self.lastPathUsed,title = "Select solution file",filetypes = (("json files","*.json"),("all files","*.*")))
-		if filename != () and filename != '':
-			self.guiInput.sendCommand('loadNewSolution '+filename)
-			self.setLastPathUsed(os.path.dirname(filename))	
+		# filename = tk.filedialog.askopenfilename(initialdir = self.lastPathUsed,title = "Select solution file",filetypes = (("json files","*.json"),("all files","*.*")))
+		# if filename != () and filename != '':
+		# 	self.guiInput.sendCommand('loadNewSolution '+filename)
+		# 	self.setLastPathUsed(os.path.dirname(filename))	
+		solutionFile = "/home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Solution.json"
+		with open(solutionFile) as sFile:
+			solutions = json.load(sFile)
+			self.mySolutions = solutions['Solutions']
+			
 
 	def on_saveLastSolution(self):
 		''' open a file dialog to retrieve the name of the file to save
@@ -433,14 +439,22 @@ class mainWindow:
 			simulatorMsg = self.guiInput.getMessage()
 
 
-		self.t1 = time.time()
-		if self.t1 - self.t2 > 1:
-			self.simuframe.displayLastSolution()
+		# self.t1 = time.time()
+		# if self.t1 - self.t2 > 1:
+		# 	self.simuframe.displayLastSolution()
+
+		# 	self.scenarioTab.displayLastSolution()
+
+		# 	self.map.updateDisplay()
+		# 	self.t2 = time.time()
+		if self.mySolutions != None:
+			print("solution part")
+			self.simuframe.displayLastSolution(self.mySolutions)
 
 			self.scenarioTab.displayLastSolution()
 
 			self.map.updateDisplay()
-			self.t2 = time.time()
+		
 
 
 		self.simuframe.displayTime()

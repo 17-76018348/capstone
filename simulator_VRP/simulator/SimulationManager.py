@@ -51,7 +51,7 @@ class SMthread(threading.Thread):
 
         self.eventCommandFinished = None
         self.scriptMode = False
-
+        self.vehicle_capacity = {"0": 200,"1": 200}
 
     def setEventCommandFinished(self, eventCommandFinished):
         self.eventCommandFinished = eventCommandFinished
@@ -454,6 +454,7 @@ class SMthread(threading.Thread):
                         # offline dataset
                         command = 'loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/carrier.json'
                         command = command.replace('loadCarrier ', '', 1).rstrip()
+                        print(command)
                         if myCarrier.loadFile(command):
                             # add to NotSent remove form Sent
                             self.addToDataNotSent('Carrier')
@@ -589,6 +590,7 @@ class SMthread(threading.Thread):
 
                 elif commandSplit[0] == 'loadUserSolutions':
                     command = command.replace('loadSolutions ', '', 1).rstrip()
+                    print("ppp",command,"ppp")
                     self.mySolutions.loadFile(command)
                     self.printLog('User command : loadSolution %s' % command)
 
@@ -1223,7 +1225,7 @@ class SMthread(threading.Thread):
                                     self.mySolutions.realTimeUnit = myCustomer.data['RealTimeUnit']
                                     self.mySolutions.carrierUnit = myCarrier.data['Unit']
 
-                                    mySimulation = Simulation.simulationOfflineThread(myScenario, self.downQueue, self.upQueue,self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, myCarrier, self.mySolutions, myCustomer, myGraph,self.logFile)                        
+                                    mySimulation = Simulation.simulationOfflineThread(self.vehicle_capacity,myScenario, self.downQueue, self.upQueue,self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, myCarrier, self.mySolutions, myCustomer, myGraph,self.logFile)                        
                                     #mySimulation = Simulation.simulationOfflineThread(myScenario, self.downQueue, self.upQueue, self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, self.logFile)                        
                                     mySimulation.start()
                                     simulationThreadLaunched = True
@@ -1309,7 +1311,7 @@ class SMthread(threading.Thread):
                                     self.mySolutions.carrierUnit = myCarrier.data['Unit']
 
 #체크포인트
-                                    mySimulation = Simulation.simulationOnlineThread(myScenario, self.downQueue, self.upQueue,self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, myCarrier, self.mySolutions, myCustomer, myGraph,self.logFile)                        
+                                    mySimulation = Simulation.simulationOnlineThread(self.vehicle_capacity,myScenario, self.downQueue, self.upQueue,self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, myCarrier, self.mySolutions, myCustomer, myGraph,self.logFile)                        
                                     mySimulation.start()
                                     simulationThreadLaunched = True
                                     self.changeStatusTo('OnlineComputation')

@@ -1,0 +1,600 @@
+{
+    "NumberOfSolutions": 0,
+    "Solutions": [
+        {
+            "Routes": {
+                "0": [
+                    {
+                        "ArrivalTime": 0,
+                        "DepartureTime": 0,
+                        "InstanceVertexID": 1,
+                        "NodeId": 1
+                    },
+                    {
+                        "ArrivalTime": 428,
+                        "DepartureTime": 432,
+                        "InstanceVertexID": 7,
+                        "NodeId": 7,
+                        "RequestId": 3,
+                        "RequestInstanceId": 3
+                    },
+                    {
+                        "ArrivalTime": 483,
+                        "DepartureTime": 487,
+                        "InstanceVertexID": 48,
+                        "NodeId": 48,
+                        "RequestId": 53,
+                        "RequestInstanceId": 53
+                    },
+                    {
+                        "ArrivalTime": 527,
+                        "DepartureTime": 531,
+                        "InstanceVertexID": 53,
+                        "NodeId": 53,
+                        "RequestId": 56,
+                        "RequestInstanceId": 56
+                    },
+                    {
+                        "ArrivalTime": 581,
+                        "DepartureTime": 585,
+                        "InstanceVertexID": 52,
+                        "NodeId": 52,
+                        "RequestId": 55,
+                        "RequestInstanceId": 55
+                    },
+                    {
+                        "ArrivalTime": 609,
+                        "DepartureTime": 613,
+                        "InstanceVertexID": 39,
+                        "NodeId": 39,
+                        "RequestId": 41,
+                        "RequestInstanceId": 41
+                    },
+                    {
+                        "ArrivalTime": 664,
+                        "DepartureTime": 668,
+                        "InstanceVertexID": 42,
+                        "NodeId": 42,
+                        "RequestId": 47,
+                        "RequestInstanceId": 47
+                    },
+                    {
+                        "ArrivalTime": 717,
+                        "DepartureTime": 722,
+                        "InstanceVertexID": 43,
+                        "NodeId": 43,
+                        "RequestId": 48,
+                        "RequestInstanceId": 48
+                    },
+                    {
+                        "ArrivalTime": 747,
+                        "DepartureTime": 751,
+                        "InstanceVertexID": 45,
+                        "NodeId": 45,
+                        "RequestId": 51,
+                        "RequestInstanceId": 51
+                    },
+                    {
+                        "ArrivalTime": 819,
+                        "DepartureTime": 823,
+                        "InstanceVertexID": 41,
+                        "NodeId": 41,
+                        "RequestId": 45,
+                        "RequestInstanceId": 45
+                    },
+                    {
+                        "ArrivalTime": 941,
+                        "DepartureTime": 945,
+                        "InstanceVertexID": 36,
+                        "NodeId": 36,
+                        "RequestId": 38,
+                        "RequestInstanceId": 38
+                    },
+                    {
+                        "ArrivalTime": 1015,
+                        "DepartureTime": 1020,
+                        "InstanceVertexID": 18,
+                        "NodeId": 18,
+                        "RequestId": 17,
+                        "RequestInstanceId": 17
+                    },
+                    {
+                        "ArrivalTime": 1072,
+                        "DepartureTime": 1076,
+                        "InstanceVertexID": 22,
+                        "NodeId": 22,
+                        "RequestId": 23,
+                        "RequestInstanceId": 23
+                    },
+                    {
+                        "ArrivalTime": 1166,
+                        "DepartureTime": 1170,
+                        "InstanceVertexID": 50,
+                        "NodeId": 50,
+                        "RequestId": 54,
+                        "RequestInstanceId": 54
+                    },
+                    {
+                        "ArrivalTime": 1239,
+                        "DepartureTime": 1244,
+                        "InstanceVertexID": 24,
+                        "NodeId": 24,
+                        "RequestId": 25,
+                        "RequestInstanceId": 25
+                    },
+                    {
+                        "ArrivalTime": 1291,
+                        "DepartureTime": 1295,
+                        "InstanceVertexID": 23,
+                        "NodeId": 23,
+                        "RequestId": 24,
+                        "RequestInstanceId": 24
+                    },
+                    {
+                        "ArrivalTime": 1359,
+                        "DepartureTime": 1363,
+                        "InstanceVertexID": 21,
+                        "NodeId": 21,
+                        "RequestId": 21,
+                        "RequestInstanceId": 21
+                    },
+                    {
+                        "ArrivalTime": 1403,
+                        "DepartureTime": 1407,
+                        "InstanceVertexID": 17,
+                        "NodeId": 17,
+                        "RequestId": 16,
+                        "RequestInstanceId": 16
+                    },
+                    {
+                        "ArrivalTime": 1513,
+                        "DepartureTime": 1517,
+                        "InstanceVertexID": 9,
+                        "NodeId": 9,
+                        "RequestId": 4,
+                        "RequestInstanceId": 4
+                    },
+                    {
+                        "ArrivalTime": 1607,
+                        "DepartureTime": 1611,
+                        "InstanceVertexID": 19,
+                        "NodeId": 19,
+                        "RequestId": 18,
+                        "RequestInstanceId": 18
+                    },
+                    {
+                        "ArrivalTime": 1678,
+                        "DepartureTime": 1682,
+                        "InstanceVertexID": 26,
+                        "NodeId": 26,
+                        "RequestId": 27,
+                        "RequestInstanceId": 27
+                    },
+                    {
+                        "ArrivalTime": 1745,
+                        "DepartureTime": 1749,
+                        "InstanceVertexID": 30,
+                        "NodeId": 30,
+                        "RequestId": 31,
+                        "RequestInstanceId": 31
+                    },
+                    {
+                        "ArrivalTime": 1838,
+                        "DepartureTime": 1842,
+                        "InstanceVertexID": 20,
+                        "NodeId": 20,
+                        "RequestId": 20,
+                        "RequestInstanceId": 20
+                    },
+                    {
+                        "ArrivalTime": 1895,
+                        "DepartureTime": 1900,
+                        "InstanceVertexID": 14,
+                        "NodeId": 14,
+                        "RequestId": 10,
+                        "RequestInstanceId": 10
+                    },
+                    {
+                        "ArrivalTime": 1983,
+                        "DepartureTime": 1987,
+                        "InstanceVertexID": 16,
+                        "NodeId": 16,
+                        "RequestId": 15,
+                        "RequestInstanceId": 15
+                    },
+                    {
+                        "ArrivalTime": 2031,
+                        "DepartureTime": 2035,
+                        "InstanceVertexID": 28,
+                        "NodeId": 28,
+                        "RequestId": 29,
+                        "RequestInstanceId": 29
+                    },
+                    {
+                        "ArrivalTime": 2060,
+                        "DepartureTime": 2064,
+                        "InstanceVertexID": 33,
+                        "NodeId": 33,
+                        "RequestId": 33,
+                        "RequestInstanceId": 33
+                    },
+                    {
+                        "ArrivalTime": 2125,
+                        "DepartureTime": 2130,
+                        "InstanceVertexID": 35,
+                        "NodeId": 35,
+                        "RequestId": 37,
+                        "RequestInstanceId": 37
+                    },
+                    {
+                        "ArrivalTime": 2168,
+                        "DepartureTime": 2172,
+                        "InstanceVertexID": 31,
+                        "NodeId": 31,
+                        "RequestId": 32,
+                        "RequestInstanceId": 32
+                    },
+                    {
+                        "ArrivalTime": 2211,
+                        "DepartureTime": 2215,
+                        "InstanceVertexID": 29,
+                        "NodeId": 29,
+                        "RequestId": 30,
+                        "RequestInstanceId": 30
+                    },
+                    {
+                        "ArrivalTime": 2268,
+                        "DepartureTime": 2273,
+                        "InstanceVertexID": 27,
+                        "NodeId": 27,
+                        "RequestId": 28,
+                        "RequestInstanceId": 28
+                    },
+                    {
+                        "ArrivalTime": 2320,
+                        "DepartureTime": 2324,
+                        "InstanceVertexID": 15,
+                        "NodeId": 15,
+                        "RequestId": 12,
+                        "RequestInstanceId": 12
+                    },
+                    {
+                        "ArrivalTime": 2388,
+                        "DepartureTime": 2392,
+                        "InstanceVertexID": 12,
+                        "NodeId": 12,
+                        "RequestId": 8,
+                        "RequestInstanceId": 8
+                    },
+                    {
+                        "ArrivalTime": 2643,
+                        "DepartureTime": 2647,
+                        "InstanceVertexID": 6,
+                        "NodeId": 6,
+                        "RequestId": 1,
+                        "RequestInstanceId": 1
+                    },
+                    {
+                        "ArrivalTime": 0,
+                        "DepartureTime": 0,
+                        "InstanceVertexID": 1,
+                        "NodeId": 1
+                    }
+                ]
+            },
+            "TimeUnitOfSubmission": 0
+        },
+        {
+            "Routes": {
+                "1": [
+                    {
+                        "ArrivalTime": 0,
+                        "DepartureTime": 0,
+                        "InstanceVertexID": 1,
+                        "NodeId": 1
+                    },
+                    {
+                        "ArrivalTime": 501,
+                        "DepartureTime": 505,
+                        "InstanceVertexID": 55,
+                        "NodeId": 55,
+                        "RequestId": 58,
+                        "RequestInstanceId": 58
+                    },
+                    {
+                        "ArrivalTime": 547,
+                        "DepartureTime": 551,
+                        "InstanceVertexID": 63,
+                        "NodeId": 63,
+                        "RequestId": 66,
+                        "RequestInstanceId": 66
+                    },
+                    {
+                        "ArrivalTime": 696,
+                        "DepartureTime": 700,
+                        "InstanceVertexID": 68,
+                        "NodeId": 68,
+                        "RequestId": 73,
+                        "RequestInstanceId": 73
+                    },
+                    {
+                        "ArrivalTime": 778,
+                        "DepartureTime": 782,
+                        "InstanceVertexID": 69,
+                        "NodeId": 69,
+                        "RequestId": 74,
+                        "RequestInstanceId": 74
+                    },
+                    {
+                        "ArrivalTime": 815,
+                        "DepartureTime": 819,
+                        "InstanceVertexID": 76,
+                        "NodeId": 76,
+                        "RequestId": 80,
+                        "RequestInstanceId": 80
+                    },
+                    {
+                        "ArrivalTime": 837,
+                        "DepartureTime": 841,
+                        "InstanceVertexID": 77,
+                        "NodeId": 77,
+                        "RequestId": 81,
+                        "RequestInstanceId": 81
+                    },
+                    {
+                        "ArrivalTime": 886,
+                        "DepartureTime": 891,
+                        "InstanceVertexID": 73,
+                        "NodeId": 73,
+                        "RequestId": 78,
+                        "RequestInstanceId": 78
+                    },
+                    {
+                        "ArrivalTime": 963,
+                        "DepartureTime": 967,
+                        "InstanceVertexID": 71,
+                        "NodeId": 71,
+                        "RequestId": 77,
+                        "RequestInstanceId": 77
+                    },
+                    {
+                        "ArrivalTime": 1031,
+                        "DepartureTime": 1035,
+                        "InstanceVertexID": 66,
+                        "NodeId": 66,
+                        "RequestId": 71,
+                        "RequestInstanceId": 71
+                    },
+                    {
+                        "ArrivalTime": 1131,
+                        "DepartureTime": 1136,
+                        "InstanceVertexID": 67,
+                        "NodeId": 67,
+                        "RequestId": 72,
+                        "RequestInstanceId": 72
+                    },
+                    {
+                        "ArrivalTime": 1258,
+                        "DepartureTime": 1262,
+                        "InstanceVertexID": 64,
+                        "NodeId": 64,
+                        "RequestId": 67,
+                        "RequestInstanceId": 67
+                    },
+                    {
+                        "ArrivalTime": 1387,
+                        "DepartureTime": 1392,
+                        "InstanceVertexID": 56,
+                        "NodeId": 56,
+                        "RequestId": 59,
+                        "RequestInstanceId": 59
+                    },
+                    {
+                        "ArrivalTime": 1457,
+                        "DepartureTime": 1462,
+                        "InstanceVertexID": 54,
+                        "NodeId": 54,
+                        "RequestId": 57,
+                        "RequestInstanceId": 57
+                    },
+                    {
+                        "ArrivalTime": 1581,
+                        "DepartureTime": 1585,
+                        "InstanceVertexID": 65,
+                        "NodeId": 65,
+                        "RequestId": 68,
+                        "RequestInstanceId": 68
+                    },
+                    {
+                        "ArrivalTime": 1706,
+                        "DepartureTime": 1710,
+                        "InstanceVertexID": 61,
+                        "NodeId": 61,
+                        "RequestId": 63,
+                        "RequestInstanceId": 63
+                    },
+                    {
+                        "ArrivalTime": 1766,
+                        "DepartureTime": 1770,
+                        "InstanceVertexID": 83,
+                        "NodeId": 83,
+                        "RequestId": 87,
+                        "RequestInstanceId": 87
+                    },
+                    {
+                        "ArrivalTime": 1796,
+                        "DepartureTime": 1800,
+                        "InstanceVertexID": 62,
+                        "NodeId": 62,
+                        "RequestId": 65,
+                        "RequestInstanceId": 65
+                    },
+                    {
+                        "ArrivalTime": 1870,
+                        "DepartureTime": 1874,
+                        "InstanceVertexID": 79,
+                        "NodeId": 79,
+                        "RequestId": 83,
+                        "RequestInstanceId": 83
+                    },
+                    {
+                        "ArrivalTime": 1891,
+                        "DepartureTime": 1895,
+                        "InstanceVertexID": 81,
+                        "NodeId": 81,
+                        "RequestId": 84,
+                        "RequestInstanceId": 84
+                    },
+                    {
+                        "ArrivalTime": 1933,
+                        "DepartureTime": 1938,
+                        "InstanceVertexID": 82,
+                        "NodeId": 82,
+                        "RequestId": 85,
+                        "RequestInstanceId": 85
+                    },
+                    {
+                        "ArrivalTime": 1992,
+                        "DepartureTime": 1996,
+                        "InstanceVertexID": 60,
+                        "NodeId": 60,
+                        "RequestId": 60,
+                        "RequestInstanceId": 60
+                    },
+                    {
+                        "ArrivalTime": 0,
+                        "DepartureTime": 0,
+                        "InstanceVertexID": 1,
+                        "NodeId": 1
+                    }
+                ]
+            },
+            "TimeUnitOfSubmission": 0
+        },
+        {
+            "Routes": {
+                "0": [
+                    {
+                        "ArrivalTime": 0,
+                        "DepartureTime": 0,
+                        "InstanceVertexID": 1,
+                        "NodeId": 1
+                    },
+                    {
+                        "ArrivalTime": 369,
+                        "DepartureTime": 373,
+                        "InstanceVertexID": 87,
+                        "NodeId": 87,
+                        "RequestId": 94,
+                        "RequestInstanceId": 94
+                    },
+                    {
+                        "ArrivalTime": 579,
+                        "DepartureTime": 583,
+                        "InstanceVertexID": 89,
+                        "NodeId": 89,
+                        "RequestId": 98,
+                        "RequestInstanceId": 98
+                    },
+                    {
+                        "ArrivalTime": 696,
+                        "DepartureTime": 700,
+                        "InstanceVertexID": 90,
+                        "NodeId": 90,
+                        "RequestId": 99,
+                        "RequestInstanceId": 99
+                    },
+                    {
+                        "ArrivalTime": 958,
+                        "DepartureTime": 963,
+                        "InstanceVertexID": 93,
+                        "NodeId": 93,
+                        "RequestId": 103,
+                        "RequestInstanceId": 103
+                    },
+                    {
+                        "ArrivalTime": 1180,
+                        "DepartureTime": 1184,
+                        "InstanceVertexID": 92,
+                        "NodeId": 92,
+                        "RequestId": 102,
+                        "RequestInstanceId": 102
+                    },
+                    {
+                        "ArrivalTime": 1223,
+                        "DepartureTime": 1227,
+                        "InstanceVertexID": 95,
+                        "NodeId": 95,
+                        "RequestId": 106,
+                        "RequestInstanceId": 106
+                    },
+                    {
+                        "ArrivalTime": 1355,
+                        "DepartureTime": 1359,
+                        "InstanceVertexID": 88,
+                        "NodeId": 88,
+                        "RequestId": 96,
+                        "RequestInstanceId": 96
+                    },
+                    {
+                        "ArrivalTime": 1568,
+                        "DepartureTime": 1572,
+                        "InstanceVertexID": 91,
+                        "NodeId": 91,
+                        "RequestId": 101,
+                        "RequestInstanceId": 101
+                    },
+                    {
+                        "ArrivalTime": 1831,
+                        "DepartureTime": 1835,
+                        "InstanceVertexID": 94,
+                        "NodeId": 94,
+                        "RequestId": 105,
+                        "RequestInstanceId": 105
+                    },
+                    {
+                        "ArrivalTime": 2077,
+                        "DepartureTime": 2081,
+                        "InstanceVertexID": 86,
+                        "NodeId": 86,
+                        "RequestId": 93,
+                        "RequestInstanceId": 93
+                    },
+                    {
+                        "ArrivalTime": 2401,
+                        "DepartureTime": 2406,
+                        "InstanceVertexID": 97,
+                        "NodeId": 97,
+                        "RequestId": 108,
+                        "RequestInstanceId": 108
+                    },
+                    {
+                        "ArrivalTime": 2496,
+                        "DepartureTime": 2500,
+                        "InstanceVertexID": 98,
+                        "NodeId": 98,
+                        "RequestId": 110,
+                        "RequestInstanceId": 110
+                    },
+                    {
+                        "ArrivalTime": 2655,
+                        "DepartureTime": 2660,
+                        "InstanceVertexID": 101,
+                        "NodeId": 101,
+                        "RequestId": 112,
+                        "RequestInstanceId": 112
+                    },
+                    {
+                        "ArrivalTime": 0,
+                        "DepartureTime": 0,
+                        "InstanceVertexID": 1,
+                        "NodeId": 1
+                    }
+                ]
+            },
+            "TimeUnitOfSubmission": 0
+        }
+    ],
+    "SolutionsNotValid": [],
+    "UserSolution": []
+}

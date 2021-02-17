@@ -351,15 +351,17 @@ class simulationFrame(tk.Frame):
 		else:
 			return (None, None)
 
-	def displayLastSolution(self):
-		if len(self.solutionsList) > 0:
+	def displayLastSolution(self,mySolutions):
+		solution_list =mySolutions
+		if len(solution_list) > 0:
 
 			# get the solution object and the nummer of this solution
-			lastSolution = self.solutionsList[-1]
-			solutionId   = len(self.solutionsList)-1
-
-			self.displaySolution(lastSolution, solutionId)
-			self.numberSolutionVar.set('Solution {:4d}   on {:4d} '.format(solutionId+1, len(self.solutionsList)))
+			for solutionId, solution in enumerate(solution_list):
+				# lastSolution = solution_list[-1]
+				# solutionId   = len(solution_list)-1
+			
+				self.displaySolution(solution, solutionId)
+				self.numberSolutionVar.set('Solution {:4d}   on {:4d} '.format(solutionId+1, len(self.solutionsList)))
 		else:
 			self.canvas.delete('all')
 			self.canvasObj = {}
