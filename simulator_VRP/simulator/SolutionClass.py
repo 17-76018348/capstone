@@ -11,12 +11,13 @@ from ScenarioClass import Scenario
 import pprint
 import copy
 import json
-
+import pandas
 
 class Solution:
 	def __init__(self):
-		self.data = {"NumberOfSolutions" : 0, "Solutions" : [], "SolutionsNotValid" : [], 'UserSolution' : []}
-		
+		# self.data = {"NumberOfSolutions" : 0, "Solutions" : [], "SolutionsNotValid" : [], 'UserSolution' : []}
+		self.data = pd.DataFrame({"NumberOfSolutions" : 0, "Solutions" : [], "SolutionsNotValid" : [], 'UserSolution' : []})
+
 		# 원래 none이었는데 임시로 했다
 		self.realDurationPerTimeUnit = 60
 		self.realTimeUnit = "Second"
