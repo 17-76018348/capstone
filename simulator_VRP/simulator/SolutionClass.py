@@ -11,7 +11,7 @@ from ScenarioClass import Scenario
 import pprint
 import copy
 import json
-import pandas
+import pandas as pd
 
 class Solution:
 	def __init__(self):
