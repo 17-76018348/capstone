@@ -53,6 +53,7 @@ class SMthread(threading.Thread):
         self.scriptMode = False
         self.vehicle_capacity = {"0": 200,"1": 200}
 
+        self.myName = 'didrmswp'
     def setEventCommandFinished(self, eventCommandFinished):
         self.eventCommandFinished = eventCommandFinished
 
@@ -452,7 +453,7 @@ class SMthread(threading.Thread):
                         # command = 'loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Carrier.json'
 
                         # offline dataset
-                        command = 'loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/carrier.json'
+                        command = 'loadCarrier /home/' + myName + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/carrier.json'
                         command = command.replace('loadCarrier ', '', 1).rstrip()
                         print(command)
                         if myCarrier.loadFile(command):
@@ -475,7 +476,7 @@ class SMthread(threading.Thread):
                         # online dataset
                         # command = 'loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Customers.json'
                         # offline dataset
-                        command = 'loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Customer.json'
+                        command = 'loadCustomer /home/' + myName + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Customer.json'
                         command = command.replace('loadCustomer ', '', 1).rstrip()
                         if myCustomer.loadFile(command):
                             # add to NotSent
@@ -519,7 +520,7 @@ class SMthread(threading.Thread):
                         # online dataset
                         # command = 'loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Graph.json'
                         # offline dataset
-                        command = 'loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
+                        command = 'loadGraph /home/' + myName + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
 
                         command = command.replace('loadGraph ', '', 1).rstrip()
                         if myGraph.loadFile(command):
@@ -542,7 +543,7 @@ class SMthread(threading.Thread):
                         # online dataset
                         # command = 'loadScenario /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Scenario.json'
                         # offline dataset
-                        command = 'loadScenario /home/yang/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/scenario.json'
+                        command = 'loadScenario /home/' + myName + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/scenario.json'
                         command = command.replace('loadScenario ', '', 1).rstrip()
                         if myScenario.loadFile(command):
                             if 'ComputationTime' not in myScenario.data and 'ComputationTime' in myFiles:
