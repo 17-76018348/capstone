@@ -162,6 +162,7 @@ class simulationOfflineThread(threading.Thread):
             nodeId=1
             road = [{"ArrivalTime" : 0, "DepartureTime": 0 , "NodeId": nodeId,"InstanceVertexID":nodeId}]
             road.insert(1,{"ArrivalTime" : 0, "DepartureTime":0 , "NodeId": nodeId, "InstanceVertexID":nodeId})
+            print(self.mySolutions.data['Solutions'])
             self.mySolutions.data['Solutions'].append({"TimeUnitOfSubmission":0, "Routes": {"0": road}})
             # self.myCarrier.getVehicleType
             # self.myCarrier.getCapacityOfVehicle(roadId)
