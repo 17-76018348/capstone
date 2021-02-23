@@ -4,5 +4,8 @@ command = command.replace('loadCarrier ', '', 1).rstrip()
 data = None
 with open(command) as data:
     dataLoaded = json.load(data)
-    data = pd.DataFrame.from_dict(dataloaded)
+    data = pd.DataFrame.from_dict({(i,j): user_dict[i][j] 
+                           for i in user_dict.keys() 
+                           for j in user_dict[i].keys()},
+                       orient='index')
 print(data)
