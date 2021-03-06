@@ -53,7 +53,7 @@ class SMthread(threading.Thread):
         self.scriptMode = False
         self.vehicle_capacity = {"0": 200,"1": 200}
 
-        self.myName = 'didrmswp'
+        self.address = '/mnt/c/programming'
     def setEventCommandFinished(self, eventCommandFinished):
         self.eventCommandFinished = eventCommandFinished
 
@@ -225,20 +225,20 @@ class SMthread(threading.Thread):
                             validArgs = True
                             
                             # just command addvehicle
-                            if len(commandSplit) is 1:
+                            if len(commandSplit) == 1:
                                 validArgs = False
                                 print('   Error: missing numbers and types of vehicles to be added')
                                 # save log
                                 self.printLog('User command: ' + command + ' : Error: missing numbers and types of vehicles to be added')
                             
                             # in normal command -> addvehicle number types -> 3 argument3, 5, 7, 9
-                            elif len(commandSplit)%2 is 0:
+                            elif len(commandSplit)%2 == 0:
                                 validArgs = False
                                 print('   Error: the number of argument is not correct')
                                 self.printLog('User command: ' + command + ' Error: the number of argument is not correct')
                             
                             # normal case
-                            elif len(commandSplit)%2 is 1:
+                            elif len(commandSplit)%2 == 1:
                                 expect = 'Number'
                                 for arg in commandSplit[1:]:
                                     if expect == 'Number':
@@ -453,7 +453,7 @@ class SMthread(threading.Thread):
                         # command = 'loadCarrier /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Carrier.json'
 
                         # offline dataset
-                        command = 'loadCarrier /home/' + self.myName + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/carrier.json'
+                        command = self.address + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/carrier.json'
                         command = command.replace('loadCarrier ', '', 1).rstrip()
                         if myCarrier.loadFile(command):
                             # add to NotSent remove form Sent
@@ -475,7 +475,7 @@ class SMthread(threading.Thread):
                         # online dataset
                         # command = 'loadCustomer /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Customers.json'
                         # offline dataset
-                        command = 'loadCustomer /home/' + self.myName + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Customer.json'
+                        command = self.address + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Customer.json'
                         command = command.replace('loadCustomer ', '', 1).rstrip()
                         if myCustomer.loadFile(command):
                             # add to NotSent
@@ -519,7 +519,7 @@ class SMthread(threading.Thread):
                         # online dataset
                         # command = 'loadGraph /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Graph.json'
                         # offline dataset
-                        command = 'loadGraph /home/' + self.myName + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
+                        command = self.address + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
 
                         command = command.replace('loadGraph ', '', 1).rstrip()
                         if myGraph.loadFile(command):
@@ -542,7 +542,7 @@ class SMthread(threading.Thread):
                         # online dataset
                         # command = 'loadScenario /home/yang/capstone/simulator_VRP/instance_vrp/bent_pvh_ds-vrptw/benchmarks_simulator/class1/0-100-rc101-1Scenario.json'
                         # offline dataset
-                        command = 'loadScenario /home/' + self.myName + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/scenario.json'
+                        command = self.address + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/scenario.json'
                         command = command.replace('loadScenario ', '', 1).rstrip()
                         if myScenario.loadFile(command):
                             if 'ComputationTime' not in myScenario.data and 'ComputationTime' in myFiles:
@@ -987,14 +987,14 @@ class SMthread(threading.Thread):
                             print('   It is not allowed to change the computation time during the simulation')
                         else:
                             command = commandSplit
-                            if len(command) is 1:
+                            if len(command) == 1:
                                 print('   Error: missing computation time in argument')
                                 self.printLog('User command : setComputationTime : Error: missing computation time in argument')
                             if len(command) > 2:
                                 print('   Error: to many argument')
                                 self.printLog('User command : setComputationTime : Error: to many argument')
 
-                            if len(command) is 2:
+                            if len(command) == 2:
                                 myFiles["ComputationTime"] = float(command[1])
                                 myScenario.data["ComputationTime"] = float(command[1])
                                 self.addToDataNotSent('ComputationTime')
@@ -1031,7 +1031,7 @@ class SMthread(threading.Thread):
                             print('   It is not allowed to change the OfflineTime time during the simulation')
                         else:
                             command = commandSplit
-                            if len(command) is 1:
+                            if len(command) == 1:
                                 print('   Error: missing offline time in argument')
                                 self.printLog('User command : setOfflineTime : Error: missing offline time in argument')
 
@@ -1039,7 +1039,7 @@ class SMthread(threading.Thread):
                                 print('   Error: to many argument')
                                 self.printLog('User command : setOfflineTime : Error: to many argument')
 
-                            if len(command) is 2:
+                            if len(command) == 2:
                                 myFiles["OfflineTime"] = float(command[1])
                                 myScenario.data["OfflineTime"] = float(command[1])
                                 self.addToDataNotSent('OfflineTime')
@@ -1060,17 +1060,17 @@ class SMthread(threading.Thread):
                             print('   Error: No Carrier file is loaded')
                         else:
                             validArgs = True
-                            if len(commandSplit) is 1:
+                            if len(commandSplit) == 1:
                                 validArgs = False
                                 print('   Error: missing capacities and types of vehicles to be modified')
                                 self.printLog('User command: ' + command + ' : Error:  missing capacities and types of vehicles to be modified')
                             
-                            elif len(commandSplit)%2 is 0:
+                            elif len(commandSplit)%2 == 0:
                                 validArgs = False
                                 print('   Error: the number of argument is not correct')
                                 self.printLog('User command: ' + command + ' Error: the number of argument is not correct')
                             
-                            elif len(commandSplit)%2 is 1:
+                            elif len(commandSplit)%2 == 1:
                                 expect = 'VehicleType'
                                 for arg in commandSplit[1:]:
                                     # loop that should altern number and vehicleType
