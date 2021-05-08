@@ -1,7 +1,7 @@
 import os
 import sys
 import gym
-import pylab
+import matplotlib.pyplot as plt
 import random
 import numpy as np
 from collections import deque
@@ -159,10 +159,10 @@ if __name__ == "__main__":
                 # 에피소드마다 학습 결과 그래프로 저장
                 scores.append(score_avg)
                 episodes.append(e)
-                pylab.plot(episodes, scores, 'b')
-                pylab.xlabel("episode")
-                pylab.ylabel("average score")
-                pylab.savefig("./save_graph/graph.png")
+                plt.plot(episodes, scores, 'b')
+                plt.xlabel("episode")
+                plt.ylabel("average score")
+                plt.savefig("./save_graph/graph.png")
 
                 # 이동 평균이 400 이상일 때 종료
                 if score_avg > 400:
