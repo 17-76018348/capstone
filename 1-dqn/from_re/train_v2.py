@@ -9,8 +9,8 @@ import tensorflow as tf
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.initializers import RandomUniform
-import env_v1
-import json
+import env_v2
+
 class DQN(tf.keras.Model):
     def __init__(self, action_size):
         super(DQN, self).__init__()
@@ -108,20 +108,13 @@ class DQNAgent:
 
 if __name__ == "__main__":
     # CartPole-v1 환경, 최대 타임스텝 수가 500
-    command = self.address + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
-    command = command.replace('loadGraph ', '', 1).rstrip()
-    data = {}
-    with open(command) as data:
-        data = json.load(data)
-    print(data)
-    sys.exit()
     x = [18, 2, 57, 77, 65, 20, 99, 37, 42, 86]
     y = [18, 2, 57, 77, 65, 20, 99, 37, 42, 86]
     cap = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1] 
-    env = env_v1.VrpEnv(x,y,cap)
+    env = env_v2.VrpEnv(x,y,cap)
     # env = gym.make('CartPole-v1')
     #state_size = env.observation_space.shape[0]
-    state_size = env.observation_space.shape[0]
+    state_size = 5
     action_size = env.action_space.n
 
     # DQN 에이전트 생성
@@ -130,13 +123,14 @@ if __name__ == "__main__":
     scores, episodes = [], []
     score_avg = 0
 
-    num_episode = 300
+    num_episode = 10000
     for e in range(num_episode):
         done = False
         score = 0
         # env 초기화
         state = env.reset()
-        state = np.reshape(state, [1, 5])
+
+        state = np.reshape(state, [1, state_size])
 
         while not done:
             if agent.render:
@@ -173,9 +167,9 @@ if __name__ == "__main__":
                 plt.plot(episodes, scores, 'b')
                 plt.xlabel("episode")
                 plt.ylabel("average score")
-                plt.savefig("./save_graph/graph.png")
+                plt.savefig("./save_graph/graph_v2.png")
 
                 # 이동 평균이 400 이상일 때 종료
                 if score_avg > 400:
-                    agent.model.save_weights("./save_model/model", save_format="tf")
+                    agent.model.save_weights("./save_model/model_v2", save_format="tf")
                     sys.exit()
