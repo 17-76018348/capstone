@@ -108,7 +108,8 @@ class DQNAgent:
 
 if __name__ == "__main__":
     # CartPole-v1 환경, 최대 타임스텝 수가 500
-    command = self.address + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
+    address = '/home/yang'
+    command = address + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
     command = command.replace('loadGraph ', '', 1).rstrip()
     data = {}
     with open(command) as data:
