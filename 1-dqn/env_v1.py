@@ -14,12 +14,22 @@ def euclidean_distance(pt1, pt2):
 
 class VrpEnv(object):
     def __init__(self, x,y,cap):
-        #self.customer_x = nodes['map_coored'][0]
-        #self.customer_y = nodes['map_coored'][1]
-        #self.capacity = nodes['capacity']
-        self.customer_x = x
-        self.customer_y = y
-        self.capacity = cap
+        address = '/home/yang'
+        command = address + '/capstone/simulator_VRP/instance_vrp/rizzo_stguillain_ds-vrptw/\
+                             OC-100-70-25%-1/12-18-0-0/lockers-no/Graph.json'
+        #myGraph.loadFile(command)
+        with open(command) as data:
+            
+        
+
+
+
+
+
+
+        #self.customer_x = x
+        #self.customer_y = y
+        #self.capacity = cap
         
         self.node_size = 10
         self.depot_x = 40

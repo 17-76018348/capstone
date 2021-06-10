@@ -134,7 +134,7 @@ if __name__ == "__main__":
             action = agent.get_action(state)
             # 선택한 행동으로 환경에서 한 타임스텝 진행
             next_state, reward, done, info = env.step(action)
-            next_state = np.reshape(next_state, [1, state_size])
+            next_state = np.reshape(next_state, [1, state_size]) 
             # 에피소드가 중간에 끝나면 -100 보상
             reward = reward if not done or score == 499 else -100
 
@@ -151,7 +151,7 @@ if __name__ == "__main__":
                 # 각 에피소드마다 타깃 모델을 모델의 가중치로 업데이트
                 agent.update_target_model()
 
-                score = score if score == 500 else score + 100
+                score = score if score == 500 else score + 30
                 # 에피소드마다 학습 결과 출력
                 scores.append(score)
                 episodes.append(e)
