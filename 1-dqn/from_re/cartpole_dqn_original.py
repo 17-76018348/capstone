@@ -1,14 +1,14 @@
 import sys
 import gym
-import pylab
+import matplotlib.pyplot as plt
 import random
 import numpy as np
 from collections import deque
-from keras.layers import Dense
-from keras.optimizers import Adam
-from keras.models import Sequential
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.optimizers import Adam
+from tensorflow.keras.models import Sequential
 
-EPISODES = 300
+EPISODES = 2000
 
 
 # 카트폴 예제에서의 DQN 에이전트
@@ -136,7 +136,7 @@ if __name__ == "__main__":
             next_state, reward, done, info = env.step(action)
             next_state = np.reshape(next_state, [1, state_size])
             # 에피소드가 중간에 끝나면 -100 보상
-            reward = reward if not done or score == 499 else -100
+            reward = reward if not done or score == 499 else -70
 
             # 리플레이 메모리에 샘플 <s, a, r, s'> 저장
             agent.append_sample(state, action, reward, next_state, done)
@@ -151,12 +151,12 @@ if __name__ == "__main__":
                 # 각 에피소드마다 타깃 모델을 모델의 가중치로 업데이트
                 agent.update_target_model()
 
-                score = score if score == 500 else score + 100
+                score = score if score == 500 else score + 70
                 # 에피소드마다 학습 결과 출력
                 scores.append(score)
                 episodes.append(e)
-                pylab.plot(episodes, scores, 'b')
-                pylab.savefig("./save_graph/cartpole_dqn.png")
+                plt.plot(episodes, scores, 'b')
+                plt.savefig("./save_graph/cartpole_dqn.png")
                 print("episode:", e, "  score:", score, "  memory length:",
                       len(agent.memory), "  epsilon:", agent.epsilon)
 
