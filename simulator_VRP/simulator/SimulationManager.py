@@ -495,24 +495,25 @@ class SMthread(threading.Thread):
 
 
                 elif commandSplit[0] == 'loadFile':
-                    if self.simulationStatus in ['PreSimulation']:
-                        command = command.replace('loadFile', '', 1).split()
-                        key = command[-1]
-                        fileName = ' '.join(command[:len(command)-1])
-                        try:
-                            myFiles[key] = json.load(open(fileName))
-                            self.addToDataNotSent('myFiles')
-                            self.removeFromDataSent('myFiles')
-                            self.printLog('User command : loadFile %s %s' % (str(fileName), str(key)))
-                        except IOError:
-                            print('   Error: cannot load the file', fileName) 
-                            self.printLog('User command : loadFile %s %s \n Error: cannot send the file %s' % (str(fileName), str(key), str(fileName)))
-                    else:
-                        print('   ERROR: a data file can only be loaded before the simulation')
+                    exec(open("/home/yang/VRP-visualizer/main_view.py").read())
+                    # if self.simulationStatus in ['PreSimulation']:
+                    #     command = command.replace('loadFile', '', 1).split()
+                    #     key = command[-1]
+                    #     fileName = ' '.join(command[:len(command)-1])
+                    #     try:
+                    #         myFiles[key] = json.load(open(fileName))
+                    #         self.addToDataNotSent('myFiles')
+                    #         self.removeFromDataSent('myFiles')
+                    #         self.printLog('User command : loadFile %s %s' % (str(fileName), str(key)))
+                    #     except IOError:
+                    #         print('   Error: cannot load the file', fileName) 
+                    #         self.printLog('User command : loadFile %s %s \n Error: cannot send the file %s' % (str(fileName), str(key), str(fileName)))
+                    # else:
+                    #     print('   ERROR: a data file can only be loaded before the simulation')
 
-                    if verbose:
-                        print('   SimulationManager :: serve command :: ', command)
-                    self.eventCommand.set()
+                    # if verbose:
+                    #     print('   SimulationManager :: serve command :: ', command)
+                    # self.eventCommand.set()
 
                 elif commandSplit[0] == 'loadGraph':
                     if self.simulationStatus in ['PreSimulation']:
@@ -1249,86 +1250,89 @@ class SMthread(threading.Thread):
                         self.eventCommand.set()
 
                 elif commandSplit == ['startOnlineSimulation']:
-                    simulationThreadLaunched = False
-                    if self.simulationStatus in ['PreSimulation']:
-                        print('   The offline simulation was not executed. Please start the offline simulation before the online simulation')
-                    if self.simulationStatus in ['OfflineEnd']:
-                        if simulationStarted:
-                            print('   A simulation is already running')
-                        else:
-                            connectionOK = dataAvailable = True
-                            initialSolution = True
-                            # check all necessary data is here
+                    import time
+                    time.sleep(3)
+                    exec(open("/home/yang/VRP-visualizer/main_ride.py").read())
+#                     simulationThreadLaunched = False
+#                     if self.simulationStatus in ['PreSimulation']:
+#                         print('   The offline simulation was not executed. Please start the offline simulation before the online simulation')
+#                     if self.simulationStatus in ['OfflineEnd']:
+#                         if simulationStarted:
+#                             print('   A simulation is already running')
+#                         else:
+#                             connectionOK = dataAvailable = True
+#                             initialSolution = True
+#                             # check all necessary data is here
                             
 
-                            if not myCustomer.data or not myGraph.data or not myScenario.data or not myCarrier.data or'ComputationTime' not in myFiles or initialSolution == False :
-                                print('    cannot launch simulation due to the following problems:')
-                                dataAvailable = False
-                                if not myCustomer.data:
-                                    print('      Customer file missing')
-                                if not myCarrier.data:
-                                    print('      Carrier file missing')
-                                if not myGraph.data:
-                                    print('      Graph file missing')
-                                if not myScenario.data:
-                                    print('      Scenario file missing')
-                                if 'ComputationTime' not in myFiles:
-                                    print('      ComputationTime missing')
-                                if initialSolution == False:
-                                    print('      Initial offline solution missing')
+#                             if not myCustomer.data or not myGraph.data or not myScenario.data or not myCarrier.data or'ComputationTime' not in myFiles or initialSolution == False :
+#                                 print('    cannot launch simulation due to the following problems:')
+#                                 dataAvailable = False
+#                                 if not myCustomer.data:
+#                                     print('      Customer file missing')
+#                                 if not myCarrier.data:
+#                                     print('      Carrier file missing')
+#                                 if not myGraph.data:
+#                                     print('      Graph file missing')
+#                                 if not myScenario.data:
+#                                     print('      Scenario file missing')
+#                                 if 'ComputationTime' not in myFiles:
+#                                     print('      ComputationTime missing')
+#                                 if initialSolution == False:
+#                                     print('      Initial offline solution missing')
 
-                            # check solver connected
-                            # if not self.simuAPI.testConnection():
-                            #     connectionOK = False
-                            #     print('      solver not connected')
+#                             # check solver connected
+#                             # if not self.simuAPI.testConnection():
+#                             #     connectionOK = False
+#                             #     print('      solver not connected')
 
-                            if connectionOK and dataAvailable:
-                                allDataWasSent = True
+#                             if connectionOK and dataAvailable:
+#                                 allDataWasSent = True
 
-                                # send computation time if not sent, but ignore offline time
-                                # if all([i == 'ComputationTime' or i == 'OfflineTime' for i in self.dataNotSent ]):
-                                #     # send an initial solution
-                                #     self.simuAPI.setCurrentSolution(json.dumps(initialSolution))
-                                #     for data in self.dataNotSent:
-                                #         if data == 'ComputationTime':
-                                #             jsonMsg = '{ "' + data + '" :' + str(json.dumps(myFiles[data])) + '}'
-                                #             # grpc communication
-                                #             # self.simuAPI.sendFile(jsonMsg)
-                                #             self.addToDataSent(data)
-                                #     self.dataNotSent = []
+#                                 # send computation time if not sent, but ignore offline time
+#                                 # if all([i == 'ComputationTime' or i == 'OfflineTime' for i in self.dataNotSent ]):
+#                                 #     # send an initial solution
+#                                 #     self.simuAPI.setCurrentSolution(json.dumps(initialSolution))
+#                                 #     for data in self.dataNotSent:
+#                                 #         if data == 'ComputationTime':
+#                                 #             jsonMsg = '{ "' + data + '" :' + str(json.dumps(myFiles[data])) + '}'
+#                                 #             # grpc communication
+#                                 #             # self.simuAPI.sendFile(jsonMsg)
+#                                 #             self.addToDataSent(data)
+#                                 #     self.dataNotSent = []
 
-                                # inform user if some data need to be sent before starting simulation
-                                # elif len(self.dataNotSent) > 0:
-                                #     allDataWasSent = False
-                                #     for data in self.dataNotSent:
-                                #         if data != 'ComputationTime':
-                                #             print('   Error: '+data+' was not sent to the solver')
-                                #             print('       please send '+data+' before starting the simulation')
-                                print("online 확인용")
-                                if allDataWasSent:
-                                    self.mySolutions.realDurationPerTimeUnit = myCustomer.data['RealDurationPerTimeUnit']
-                                    self.mySolutions.realTimeUnit = myCustomer.data['RealTimeUnit']
-                                    self.mySolutions.carrierUnit = myCarrier.data['Unit']
+#                                 # inform user if some data need to be sent before starting simulation
+#                                 # elif len(self.dataNotSent) > 0:
+#                                 #     allDataWasSent = False
+#                                 #     for data in self.dataNotSent:
+#                                 #         if data != 'ComputationTime':
+#                                 #             print('   Error: '+data+' was not sent to the solver')
+#                                 #             print('       please send '+data+' before starting the simulation')
+#                                 print("online 확인용")
+#                                 if allDataWasSent:
+#                                     self.mySolutions.realDurationPerTimeUnit = myCustomer.data['RealDurationPerTimeUnit']
+#                                     self.mySolutions.realTimeUnit = myCustomer.data['RealTimeUnit']
+#                                     self.mySolutions.carrierUnit = myCarrier.data['Unit']
 
-#체크포인트
-                                    mySimulation = Simulation.simulationOnlineThread(self.vehicle_capacity,myScenario, self.downQueue, self.upQueue,self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, myCarrier, self.mySolutions, myCustomer, myGraph,self.logFile)                        
-                                    mySimulation.start()
-                                    simulationThreadLaunched = True
-                                    self.changeStatusTo('OnlineComputation')
-                                    self.solverStatus = 'OnlineComputation'
-                                    self.printLog('User command : startSimulation')
+# #체크포인트
+#                                     mySimulation = Simulation.simulationOnlineThread(self.vehicle_capacity,myScenario, self.downQueue, self.upQueue,self.logFileLock, self.simuAPI, self.simulationQueue, self.eventSMQueue, self.eventLock, myCarrier, self.mySolutions, myCustomer, myGraph,self.logFile)                        
+#                                     mySimulation.start()
+#                                     simulationThreadLaunched = True
+#                                     self.changeStatusTo('OnlineComputation')
+#                                     self.solverStatus = 'OnlineComputation'
+#                                     self.printLog('User command : startSimulation')
 
-                    elif self.simulationStatus in ['OfflineComputation', 'OfflinePauseAsked', 'OfflinePause']:
-                        print('   ERROR: the offline simulation is already running')
-                    elif self.simulationStatus in ['OnlineComputation', 'OnlinePauseAsked', 'OnlinePause']:
-                        print('   ERROR: the online simulation is already running')
-                    elif self.simulationStatus in ['PostSimulation']:
-                        print('   ERROR: the simulator is in post simulation mode. Use the command "stopSimulation" to go back to the pre simulation mode')
+#                     elif self.simulationStatus in ['OfflineComputation', 'OfflinePauseAsked', 'OfflinePause']:
+#                         print('   ERROR: the offline simulation is already running')
+#                     elif self.simulationStatus in ['OnlineComputation', 'OnlinePauseAsked', 'OnlinePause']:
+#                         print('   ERROR: the online simulation is already running')
+#                     elif self.simulationStatus in ['PostSimulation']:
+#                         print('   ERROR: the simulator is in post simulation mode. Use the command "stopSimulation" to go back to the pre simulation mode')
                                
-                    if verbose:
-                        print('   SimulationManager :: serve command :: ', command)
-                    if not self.scriptMode or not simulationThreadLaunched:
-                        self.eventCommand.set()
+#                     if verbose:
+#                         print('   SimulationManager :: serve command :: ', command)
+#                     if not self.scriptMode or not simulationThreadLaunched:
+#                         self.eventCommand.set()
 
                 elif commandSplit == ['stopSimulation']:
                     """
